@@ -1,6 +1,6 @@
 :root {
-  --main-color-dark: rgb(42 44 47);
+  --main-color-dark: rgb(0 0 0);
   --main-color-light: rgb(255 255 255);
-  --main-color-accent: rgb(170 170 170);
-  --main-font: "Inter", arial, sans-serif;
+  --main-color-gray: rgb(84 84 84);
+  --main-font: 'Inter', arial, sans-serif;
 }
