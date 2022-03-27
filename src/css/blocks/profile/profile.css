@@ -13,3 +13,9 @@
   color: var(--main-color-light);
   font-family: var(--main-font);
 }
+
+@media screen and (max-width: 530px) {
+  .profile {
+    padding-bottom: 36px;
+  }
+}
