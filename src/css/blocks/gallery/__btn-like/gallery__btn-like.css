@@ -1,0 +1,16 @@
+.gallery__btn-like {
+  display: block;
+  width: 22px;
+  height: 19px;
+  padding-left: 18px;
+  border: none;
+  margin-left: 30px;
+  background: transparent;
+  background-image: url('../../accets/images/gallery-btn-like.svg');
+  cursor: pointer;
+  transition: opacity 0.6s linear;
+}
+
+.gallery__btn-like:hover {
+  opacity: 0.5;
+}
