@@ -1,15 +1,11 @@
 .profile {
   display: flex;
   min-width: 282px;
-  max-width: 880px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding-top: 40px;
-  padding-right: 19px;
   padding-bottom: 46px;
-  padding-left: 19px;
-  margin: auto;
   color: var(--main-color-light);
   font-family: var(--main-font);
 }
