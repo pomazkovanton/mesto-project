@@ -1,0 +1,45 @@
+.profile__btn-edit {
+  position: absolute;
+  top: 28px;
+  right: -43px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--main-color-light);
+  background: transparent;
+  cursor: pointer;
+  transform: translate(0, -50%);
+  transition: opacity 0.6s linear;
+}
+
+.profile__btn-edit:hover {
+  opacity: 0.6;
+}
+
+.profile__btn-edit::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-image: url('../../accets/images/button-ico-edit.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: '';
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 530px) {
+  .profile__btn-edit {
+    top: 18px;
+    right: -28px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile__btn-edit::before {
+    width: 7.5px;
+    height: 7.5px;
+  }
+}
