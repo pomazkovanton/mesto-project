@@ -1,10 +1,10 @@
 .gallery__btn-like {
   display: block;
   width: 22px;
+  min-width: 22px;
   height: 19px;
-  padding-left: 18px;
+  box-sizing: border-box;
   border: none;
-  margin-left: 30px;
   background: transparent;
   background-image: url('../../accets/images/gallery-btn-like.svg');
   cursor: pointer;

@@ -1,6 +1,7 @@
 .gallery__item-title {
   overflow: hidden;
   margin: 0;
+  margin-right: 25px;
   color: var(--main-color-dark);
   font-family: var(--main-font);
   font-size: 24px;
