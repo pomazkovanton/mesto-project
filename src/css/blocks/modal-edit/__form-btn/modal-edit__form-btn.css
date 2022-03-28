@@ -1,0 +1,24 @@
+.modal-edit__form-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  margin-top: 48px;
+  background-color: var(--main-color-dark);
+  color: var(--main-color-light);
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.modal-edit__form-btn:hover {
+  background-color: rgb(0 0 0 / 80%);
+}
+
+@media screen and (max-width: 530px) {
+  .modal-edit__form-btn {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

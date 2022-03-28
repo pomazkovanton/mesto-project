@@ -1,0 +1,18 @@
+.modal-edit__form-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 13px 10px 0;
+  border: none;
+  border-bottom: 1px solid rgb(0 0 0 / 20%);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+.modal-edit__form-input::placeholder {
+  opacity: 1;
+}
+
+.modal-edit__form-input:not(:first-child) {
+  margin-top: 20px;
+}

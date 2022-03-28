@@ -1,0 +1,20 @@
+.modal-edit {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  min-width: 282px;
+  max-width: 430px;
+  box-sizing: border-box;
+  padding: 35px;
+  background-color: var(--main-color-light);
+  border-radius: 10px;
+  color: var(--main-color-dark);
+  font-family: var(--main-font);
+  transform: translate(50%, -50%);
+}
+
+@media screen and (max-width: 530px) {
+  .modal-edit {
+    padding: 25px 22px;
+  }
+}
