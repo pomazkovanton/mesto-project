@@ -6,7 +6,7 @@
   box-sizing: border-box;
   border: none;
   background: transparent;
-  background-image: url('../../accets/images/gallery-btn-like.svg');
+  background-image: url("../../../../accets/images/gallery-btn-like.svg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;

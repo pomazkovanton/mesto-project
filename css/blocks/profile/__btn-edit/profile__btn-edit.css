@@ -22,11 +22,11 @@
   display: block;
   width: 10px;
   height: 10px;
-  background-image: url('../../accets/images/button-ico-edit.svg');
+  background-image: url("../../../../accets/images/button-ico-edit.svg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  content: '';
+  content: "";
   transform: translate(-50%, -50%);
 }
 
