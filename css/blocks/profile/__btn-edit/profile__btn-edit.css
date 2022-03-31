@@ -1,13 +1,10 @@
 .profile__btn-edit {
-  position: absolute;
-  top: 28px;
-  right: -43px;
+  position: relative;
   width: 24px;
   height: 24px;
   border: 1px solid var(--main-color-light);
   background: transparent;
   cursor: pointer;
-  transform: translate(0, -50%);
   transition: opacity 0.6s linear;
 }
 
@@ -32,8 +29,6 @@
 
 @media screen and (max-width: 530px) {
   .profile__btn-edit {
-    top: 18px;
-    right: -28px;
     width: 18px;
     height: 18px;
   }
