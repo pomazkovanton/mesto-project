@@ -30,13 +30,11 @@
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copyright/footer__copyright.css");
 
-@import url("../blocks/overlay/overlay.css");
-@import url("../blocks/overlay/_hide/overlay_hide.css");
-
-@import url("../blocks/modal-edit/modal-edit.css");
-@import url("../blocks/modal-edit/_hide/modal-edit_hide.css");
-@import url("../blocks/modal-edit/__title/modal-edit__title.css");
-@import url("../blocks/modal-edit/__form/modal-edit__form.css");
-@import url("../blocks/modal-edit/__form-input/modal-edit__form-input.css");
-@import url("../blocks/modal-edit/__form-btn/modal-edit__form-btn.css");
-@import url("../blocks/modal-edit/__btn-close/modal-edit__btn-close.css");
+@import url("../blocks/popup/popup.css");
+@import url("../blocks/popup/_hide/popup_hide.css");
+@import url("../blocks/popup/__container/popup__container.css");
+@import url("../blocks/popup/__title/popup__title.css");
+@import url("../blocks/popup/__form/popup__form.css");
+@import url("../blocks/popup/__form-input/popup__form-input.css");
+@import url("../blocks/popup/__form-btn/popup__form-btn.css");
+@import url("../blocks/popup/__btn-close/popup__btn-close.css");

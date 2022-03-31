@@ -1,4 +1,4 @@
-.modal-edit__form-btn {
+.popup__form-btn {
   width: 100%;
   padding: 14px;
   border: none;
@@ -12,12 +12,12 @@
   line-height: 22px;
 }
 
-.modal-edit__form-btn:hover {
+.popup__form-btn:hover {
   background-color: rgb(0 0 0 / 80%);
 }
 
 @media screen and (max-width: 530px) {
-  .modal-edit__form-btn {
+  .popup__form-btn {
     font-size: 14px;
     line-height: 17px;
   }

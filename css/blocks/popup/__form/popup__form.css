@@ -1,9 +1,9 @@
-.modal-edit__form {
+.popup__form {
   margin-top: 35px;
 }
 
 @media screen and (max-width: 530px) {
-  .modal-edit__form {
+  .popup__form {
     margin-top: 65px;
   }
 }
