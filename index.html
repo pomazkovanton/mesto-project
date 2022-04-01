@@ -141,19 +141,23 @@
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
     </div>
-    <div class="popup popup_hide">
-      <section class="popup__container">
+    <section class="popup popup_hide">
+      <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" action="#" method="post">
+        <form class="popup__form" action="#" method="post" name="formEdit">
           <input
             class="popup__form-input"
             type="text"
-            placeholder="Жак-Ив Кусто"
+            placeholder="Введите ваше имя"
+            name="userName"
+            required
           />
           <input
             class="popup__form-input"
             type="text"
-            placeholder="Исследователь океана"
+            placeholder="Введите вашу профессию"
+            name="userPosition"
+            required
           />
           <button class="popup__form-btn" type="submit">Сохранить</button>
         </form>
@@ -162,8 +166,8 @@
           type="button"
           aria-label="Закрыть модальное окно"
         ></button>
-      </section>
-    </div>
+      </div>
+    </section>
     <script src="./js/index.js"></script>
   </body>
 </html>
