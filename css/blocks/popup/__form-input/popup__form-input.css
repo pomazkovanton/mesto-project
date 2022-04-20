@@ -9,10 +9,6 @@
   line-height: 17px;
 }
 
-.popup__form-input::placeholder {
-  opacity: 1;
-}
-
 .popup__form-input:not(:first-child) {
   margin-top: 20px;
 }
