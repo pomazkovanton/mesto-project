@@ -41,16 +41,19 @@ const initialCards = [
   },
 ];
 
+//Функция закрытия модальных окон
 function closePopup(popup) {
   popup.classList.add("popup_hide");
 }
 
+//Функция открытия окна редактирования профиля
 function openPopupEdit() {
   inputName.value = nameUser.textContent;
   inputPosition.value = positionUser.textContent;
   popupEdit.classList.remove("popup_hide");
 }
 
+//Функция для обработки отправки формы изменения профиля
 function formEditSubmitHandler(evt) {
   evt.preventDefault();
 
