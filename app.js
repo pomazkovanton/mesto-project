@@ -71,6 +71,13 @@ function addCard(namePlace, linkImg) {
   cardElement.querySelector(".gallery__img").alt = namePlace;
   cardElement.querySelector(".gallery__item-title").textContent = namePlace;
 
+  //Обработка лайков
+  cardElement
+    .querySelector(".gallery__btn-like")
+    .addEventListener("click", function (evt) {
+      evt.target.classList.toggle("gallery__btn-like_active");
+    });
+
   cardsContainer.append(cardElement);
 }
 
