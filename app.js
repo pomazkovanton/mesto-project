@@ -102,6 +102,15 @@ function loadingCards() {
   });
 }
 
+//Функция для обработки отправки формы добавления новой карточки
+function formAddSubmitHandler(evt) {
+  evt.preventDefault();
+  addCard(inputPlace.value, inputImg.value);
+  closePopup(popupAdd);
+  inputPlace.value = "";
+  inputImg.value = "";
+}
+
 //Обработка событий для модального окна редактирования профиля
 btnEdit.addEventListener("click", openPopupEdit);
 formEdit.addEventListener("submit", formEditSubmitHandler);
@@ -110,5 +119,6 @@ closeBtnEdit.addEventListener("click", () => closePopup(popupEdit));
 //Обработка событий для модального окна добавления карточки
 btnAdd.addEventListener("click", () => openPopup(popupAdd));
 closeBtnAdd.addEventListener("click", () => closePopup(popupAdd));
+formAdd.addEventListener("submit", formAddSubmitHandler);
 
 loadingCards();
