@@ -1,16 +1,22 @@
 const btnEdit = document.querySelector(".profile__btn-edit");
+const btnAdd = document.querySelector(".profile__btn-add");
 
 const popupEdit = document.querySelector(".popup_type_edit");
+const popupAdd = document.querySelector(".popup_type_add");
 
 const closeBtnEdit = popupEdit.querySelector(".popup__btn-close");
+const closeBtnAdd = popupAdd.querySelector(".popup__btn-close");
 
 let nameUser = document.querySelector(".profile__name");
 let positionUser = document.querySelector(".profile__position");
 
 let inputName = popupEdit.querySelector(".popup__form-input_type_name");
 let inputPosition = popupEdit.querySelector(".popup__form-input_type_position");
+let inputPlace = popupAdd.querySelector(".popup__form-input_type_place");
+let inputImg = popupAdd.querySelector(".popup__form-input_type_img");
 
 const formEdit = popupEdit.querySelector(".popup__form");
+const formAdd = popupAdd.querySelector(".popup__form");
 
 const cardsContainer = document.querySelector(".gallery__list");
 
@@ -44,6 +50,11 @@ const initialCards = [
 //Функция закрытия модальных окон
 function closePopup(popup) {
   popup.classList.add("popup_hide");
+}
+
+//Функция открытия модальных окон
+function openPopup(popup) {
+  popup.classList.remove("popup_hide");
 }
 
 //Функция открытия окна редактирования профиля
@@ -95,5 +106,8 @@ function loadingCards() {
 btnEdit.addEventListener("click", openPopupEdit);
 formEdit.addEventListener("submit", formEditSubmitHandler);
 closeBtnEdit.addEventListener("click", () => closePopup(popupEdit));
+
+//Обработка событий для модального окна добавления карточки
+btnAdd.addEventListener("click", () => openPopup(popupAdd));
 
 loadingCards();
