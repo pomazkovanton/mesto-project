@@ -12,6 +12,8 @@ let inputPosition = popupEdit.querySelector(".popup__form-input_type_position");
 
 const formEdit = popupEdit.querySelector(".popup__form");
 
+const cardsContainer = document.querySelector(".gallery__list");
+
 const initialCards = [
   {
     name: "Архыз",
@@ -58,7 +60,30 @@ function formEditSubmitHandler(evt) {
   closePopup(popupEdit);
 }
 
+//Функция добавления новой карточки
+function addCard(namePlace, linkImg) {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate
+    .querySelector(".gallery__item")
+    .cloneNode(true);
+
+  cardElement.querySelector(".gallery__img").src = linkImg;
+  cardElement.querySelector(".gallery__img").alt = namePlace;
+  cardElement.querySelector(".gallery__item-title").textContent = namePlace;
+
+  cardsContainer.append(cardElement);
+}
+
+//Функция первоначальной загрузки карточек
+function loadingCards() {
+  initialCards.forEach((card) => {
+    addCard(card.name, card.link);
+  });
+}
+
 //Обработка событий для модального окна редактирования профиля
 btnEdit.addEventListener("click", openPopupEdit);
 formEdit.addEventListener("submit", formEditSubmitHandler);
 closeBtnEdit.addEventListener("click", () => closePopup(popupEdit));
+
+loadingCards();
