@@ -43,126 +43,7 @@
       </section>
       <section class="gallery">
         <ul class="gallery__list">
-          <li class="gallery__item">
-            <img
-              class="gallery__img"
-              src="./accets/images/gallery-1.jpg"
-              alt="Карачаевск"
-            />
-            <div class="gallery__item-wrapper">
-              <h3 class="gallery__item-title">Карачаевск</h3>
-              <button
-                class="gallery__btn-like"
-                type="button"
-                aria-label="Поставить лайк"
-              ></button>
-            </div>
-            <button
-              class="gallery__btn-del"
-              type="button"
-              aria-label="Удалить карточку"
-            ></button>
-          </li>
-          <li class="gallery__item">
-            <img
-              class="gallery__img"
-              src="./accets/images/gallery-2.jpg"
-              alt="Гора Эльбрус"
-            />
-            <div class="gallery__item-wrapper">
-              <h3 class="gallery__item-title">Гора Эльбрус</h3>
-              <button
-                class="gallery__btn-like"
-                type="button"
-                aria-label="Поставить лайк"
-              ></button>
-            </div>
-            <button
-              class="gallery__btn-del"
-              type="button"
-              aria-label="Удалить карточку"
-            ></button>
-          </li>
-          <li class="gallery__item">
-            <img
-              class="gallery__img"
-              src="./accets/images/gallery-3.jpg"
-              alt="Домбай"
-            />
-            <div class="gallery__item-wrapper">
-              <h3 class="gallery__item-title">Домбай</h3>
-              <button
-                class="gallery__btn-like"
-                type="button"
-                aria-label="Поставить лайк"
-              ></button>
-            </div>
-            <button
-              class="gallery__btn-del"
-              type="button"
-              aria-label="Удалить карточку"
-            ></button>
-          </li>
-          <li class="gallery__item">
-            <img
-              class="gallery__img"
-              src="./accets/images/gallery-2.jpg"
-              alt="Гора Эльбрус"
-            />
-            <div class="gallery__item-wrapper">
-              <h3 class="gallery__item-title">Гора Эльбрус</h3>
-              <button
-                class="gallery__btn-like"
-                type="button"
-                aria-label="Поставить лайк"
-              ></button>
-            </div>
-            <button
-              class="gallery__btn-del"
-              type="button"
-              aria-label="Удалить карточку"
-            ></button>
-          </li>
-          <li class="gallery__item">
-            <img
-              class="gallery__img"
-              src="./accets/images/gallery-3.jpg"
-              alt="Домбай"
-            />
-            <div class="gallery__item-wrapper">
-              <h3 class="gallery__item-title">Домбай</h3>
-              <button
-                class="gallery__btn-like"
-                type="button"
-                aria-label="Поставить лайк"
-              ></button>
-            </div>
-            <button
-              class="gallery__btn-del"
-              type="button"
-              aria-label="Удалить карточку"
-            ></button>
-          </li>
-          <li class="gallery__item">
-            <img
-              class="gallery__img"
-              src="./accets/images/gallery-1.jpg"
-              alt="Карачаевск"
-            />
-            <div class="gallery__item-wrapper">
-              <h3 class="gallery__item-title">Карачаево-Черкесия</h3>
-              <button
-                class="gallery__btn-like"
-                type="button"
-                aria-label="Поставить лайк"
-              ></button>
-            </div>
-            <button
-              class="gallery__btn-del"
-              type="button"
-              aria-label="Удалить карточку"
-            ></button>
-          </li>
+          // Контейнер для пользовательских карточек
         </ul>
       </section>
     </main>
@@ -225,11 +106,7 @@
     </div>
     <div class="popup popup_hide">
       <figure class="popup__figure">
-        <img
-          class="popup__figure-img"
-          src="#"
-          alt="#"
-        />
+        <img class="popup__figure-img" src="#" alt="#" />
         <figcaption class="popup__figure-caption">#</figcaption>
         <button
           class="popup__btn-close"
@@ -238,6 +115,24 @@
         ></button>
       </figure>
     </div>
+    <template id="card-template">
+      <li class="gallery__item">
+        <img class="gallery__img" src="#" alt="#" />
+        <div class="gallery__item-wrapper">
+          <h3 class="gallery__item-title"></h3>
+          <button
+            class="gallery__btn-like"
+            type="button"
+            aria-label="Поставить лайк"
+          ></button>
+        </div>
+        <button
+          class="gallery__btn-del"
+          type="button"
+          aria-label="Удалить карточку"
+        ></button>
+      </li>
+    </template>
     <script src="./app.js"></script>
   </body>
 </html>
