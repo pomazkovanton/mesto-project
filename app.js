@@ -109,5 +109,6 @@ closeBtnEdit.addEventListener("click", () => closePopup(popupEdit));
 
 //Обработка событий для модального окна добавления карточки
 btnAdd.addEventListener("click", () => openPopup(popupAdd));
+closeBtnAdd.addEventListener("click", () => closePopup(popupAdd));
 
 loadingCards();
