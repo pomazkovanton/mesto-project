@@ -3,12 +3,16 @@ const btnAdd = document.querySelector(".profile__btn-add");
 
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
+const popupView = document.querySelector(".popup_type_view");
 
 const closeBtnEdit = popupEdit.querySelector(".popup__btn-close");
 const closeBtnAdd = popupAdd.querySelector(".popup__btn-close");
+const closeBtnView = popupView.querySelector(".popup__btn-close");
 
 let nameUser = document.querySelector(".profile__name");
 let positionUser = document.querySelector(".profile__position");
+let popupViewImg = popupView.querySelector(".popup__figure-img");
+let popupViewCaption = popupView.querySelector(".popup__figure-caption");
 
 let inputName = popupEdit.querySelector(".popup__form-input_type_name");
 let inputPosition = popupEdit.querySelector(".popup__form-input_type_position");
@@ -99,6 +103,15 @@ function addCard(namePlace, linkImg) {
       evt.target.parentElement.remove();
     });
 
+  //Открытие модального окна с изображением
+  cardElement
+    .querySelector(".gallery__img")
+    .addEventListener("click", function (evt) {
+      popupViewImg.src = evt.target.src;
+      popupViewImg.alt = evt.target.alt;
+      popupViewCaption.textContent = evt.target.alt;
+      openPopup(popupView);
+    });
   cardsContainer.append(cardElement);
 }
 
@@ -127,5 +140,8 @@ closeBtnEdit.addEventListener("click", () => closePopup(popupEdit));
 btnAdd.addEventListener("click", () => openPopup(popupAdd));
 closeBtnAdd.addEventListener("click", () => closePopup(popupAdd));
 formAdd.addEventListener("submit", formAddSubmitHandler);
+
+//Обработка событий для модального окна с изображениями
+closeBtnView.addEventListener("click", () => closePopup(popupView));
 
 loadingCards();
