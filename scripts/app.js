@@ -80,10 +80,12 @@ function createCard(namePlace, linkImg) {
   const cardElement = cardTemplate
     .querySelector(".gallery__item")
     .cloneNode(true);
+  const galleryImg = cardElement.querySelector(".gallery__img");
+  const galleryTitle = cardElement.querySelector(".gallery__item-title");
 
-  cardElement.querySelector(".gallery__img").src = linkImg;
-  cardElement.querySelector(".gallery__img").alt = namePlace;
-  cardElement.querySelector(".gallery__item-title").textContent = namePlace;
+  galleryImg.src = linkImg;
+  galleryImg.alt = namePlace;
+  galleryTitle.textContent = namePlace;
 
   //Обработка лайков
   cardElement
@@ -100,22 +102,20 @@ function createCard(namePlace, linkImg) {
     });
 
   //Открытие модального окна с изображением
-  cardElement
-    .querySelector(".gallery__img")
-    .addEventListener("click", function (evt) {
-      popupViewImg.src = evt.target.src;
-      popupViewImg.alt = evt.target.alt;
-      popupViewCaption.textContent = evt.target.alt;
-      togglePopup(popupView);
-    });
+  galleryImg.addEventListener("click", function (evt) {
+    popupViewImg.src = evt.target.src;
+    popupViewImg.alt = evt.target.alt;
+    popupViewCaption.textContent = evt.target.alt;
+    togglePopup(popupView);
+  });
 
   return cardElement;
 }
 
 //Функция добавления новой карточки
 function addCard(namePlace, linkImg) {
-  const cardElement = createCard(namePlace, linkImg);
-  cardsContainer.append(cardElement);
+  const card = createCard(namePlace, linkImg);
+  cardsContainer.append(card);
 }
 
 //Функция первоначальной загрузки карточек
