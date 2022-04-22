@@ -9,15 +9,17 @@ const closeBtnEdit = popupEdit.querySelector(".popup__btn-close");
 const closeBtnAdd = popupAdd.querySelector(".popup__btn-close");
 const closeBtnView = popupView.querySelector(".popup__btn-close");
 
-let nameUser = document.querySelector(".profile__name");
-let positionUser = document.querySelector(".profile__position");
-let popupViewImg = popupView.querySelector(".popup__figure-img");
-let popupViewCaption = popupView.querySelector(".popup__figure-caption");
+const nameUser = document.querySelector(".profile__name");
+const positionUser = document.querySelector(".profile__position");
+const popupViewImg = popupView.querySelector(".popup__figure-img");
+const popupViewCaption = popupView.querySelector(".popup__figure-caption");
 
-let inputName = popupEdit.querySelector(".popup__form-input_type_name");
-let inputPosition = popupEdit.querySelector(".popup__form-input_type_position");
-let inputPlace = popupAdd.querySelector(".popup__form-input_type_place");
-let inputImg = popupAdd.querySelector(".popup__form-input_type_img");
+const inputName = popupEdit.querySelector(".popup__form-input_type_name");
+const inputPosition = popupEdit.querySelector(
+  ".popup__form-input_type_position"
+);
+const inputPlace = popupAdd.querySelector(".popup__form-input_type_place");
+const inputImg = popupAdd.querySelector(".popup__form-input_type_img");
 
 const formEdit = popupEdit.querySelector(".popup__form");
 const formAdd = popupAdd.querySelector(".popup__form");
