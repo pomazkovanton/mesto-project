@@ -5,9 +5,7 @@ const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
 const popupView = document.querySelector(".popup_type_view");
 
-const closeBtnEdit = popupEdit.querySelector(".popup__btn-close");
-const closeBtnAdd = popupAdd.querySelector(".popup__btn-close");
-const closeBtnView = popupView.querySelector(".popup__btn-close");
+const closeButtons = document.querySelectorAll(".popup__btn-close");
 
 const nameUser = document.querySelector(".profile__name");
 const positionUser = document.querySelector(".profile__position");
@@ -137,14 +135,15 @@ function handleCardFormSubmit(evt) {
 //Обработка событий для модального окна редактирования профиля
 btnEdit.addEventListener("click", openPopupEdit);
 formEdit.addEventListener("submit", handleProfileFormSubmit);
-closeBtnEdit.addEventListener("click", () => togglePopup(popupEdit));
 
 //Обработка событий для модального окна добавления карточки
 btnAdd.addEventListener("click", () => togglePopup(popupAdd));
-closeBtnAdd.addEventListener("click", () => togglePopup(popupAdd));
 formAdd.addEventListener("submit", handleCardFormSubmit);
 
-//Обработка событий для модального окна с изображениями
-closeBtnView.addEventListener("click", () => togglePopup(popupView));
+//Обработка событий закрытия модальных окон
+closeButtons.forEach((button) => {
+  const popup = button.closest(".popup"); // С помощью closest возвращает ближайщий родительский элемент
+  button.addEventListener("click", () => togglePopup(popup));
+});
 
 renderCards();
