@@ -66,7 +66,7 @@ function openPopupEdit() {
 }
 
 //Функция для обработки отправки формы изменения профиля
-function formEditSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   nameUser.textContent = inputName.value;
@@ -120,7 +120,7 @@ function loadingCards() {
 }
 
 //Функция для обработки отправки формы добавления новой карточки
-function formAddSubmitHandler(evt) {
+function handleCardFormSubmit(evt) {
   evt.preventDefault();
   addCard(inputPlace.value, inputImg.value);
   togglePopup(popupAdd);
@@ -130,13 +130,13 @@ function formAddSubmitHandler(evt) {
 
 //Обработка событий для модального окна редактирования профиля
 btnEdit.addEventListener("click", openPopupEdit);
-formEdit.addEventListener("submit", formEditSubmitHandler);
+formEdit.addEventListener("submit", handleProfileFormSubmit);
 closeBtnEdit.addEventListener("click", () => togglePopup(popupEdit));
 
 //Обработка событий для модального окна добавления карточки
 btnAdd.addEventListener("click", () => togglePopup(popupAdd));
 closeBtnAdd.addEventListener("click", () => togglePopup(popupAdd));
-formAdd.addEventListener("submit", formAddSubmitHandler);
+formAdd.addEventListener("submit", handleCardFormSubmit);
 
 //Обработка событий для модального окна с изображениями
 closeBtnView.addEventListener("click", () => togglePopup(popupView));
