@@ -97,8 +97,8 @@ function createCard(namePlace, linkImg) {
   //Удаление карточки
   cardElement
     .querySelector(".gallery__btn-del")
-    .addEventListener("click", function (evt) {
-      evt.target.parentElement.remove();
+    .addEventListener("click", function () {
+      cardElement.remove();
     });
 
   //Открытие модального окна с изображением
