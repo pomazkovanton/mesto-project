@@ -118,8 +118,8 @@ function addCard(namePlace, linkImg) {
   cardsContainer.append(card);
 }
 
-//Функция первоначальной загрузки карточек
-function loadingCards() {
+//Функция отрисовки карточек
+function renderCards() {
   initialCards.forEach((card) => {
     addCard(card.name, card.link);
   });
@@ -147,4 +147,4 @@ formAdd.addEventListener("submit", handleCardFormSubmit);
 //Обработка событий для модального окна с изображениями
 closeBtnView.addEventListener("click", () => togglePopup(popupView));
 
-loadingCards();
+renderCards();
