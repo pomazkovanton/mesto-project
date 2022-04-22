@@ -114,7 +114,7 @@ function createCard(namePlace, linkImg) {
 //Функция добавления новой карточки
 function addCard(namePlace, linkImg) {
   const card = createCard(namePlace, linkImg);
-  cardsContainer.append(card);
+  cardsContainer.prepend(card);
 }
 
 //Функция отрисовки карточек
