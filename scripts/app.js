@@ -54,7 +54,7 @@ const initialCards = [
 ];
 
 //Функция закрытия/открытия модальных окон
-function closeOpenPopup(popup) {
+function togglePopup(popup) {
   popup.classList.toggle("popup_hide");
 }
 
@@ -62,7 +62,7 @@ function closeOpenPopup(popup) {
 function openPopupEdit() {
   inputName.value = nameUser.textContent;
   inputPosition.value = positionUser.textContent;
-  closeOpenPopup(popupEdit);
+  togglePopup(popupEdit);
 }
 
 //Функция для обработки отправки формы изменения профиля
@@ -72,7 +72,7 @@ function formEditSubmitHandler(evt) {
   nameUser.textContent = inputName.value;
   positionUser.textContent = inputPosition.value;
 
-  closeOpenPopup(popupEdit);
+  togglePopup(popupEdit);
 }
 
 //Функция добавления новой карточки
@@ -107,7 +107,7 @@ function addCard(namePlace, linkImg) {
       popupViewImg.src = evt.target.src;
       popupViewImg.alt = evt.target.alt;
       popupViewCaption.textContent = evt.target.alt;
-      closeOpenPopup(popupView);
+      togglePopup(popupView);
     });
   cardsContainer.append(cardElement);
 }
@@ -123,7 +123,7 @@ function loadingCards() {
 function formAddSubmitHandler(evt) {
   evt.preventDefault();
   addCard(inputPlace.value, inputImg.value);
-  closeOpenPopup(popupAdd);
+  togglePopup(popupAdd);
   inputPlace.value = "";
   inputImg.value = "";
 }
@@ -131,14 +131,14 @@ function formAddSubmitHandler(evt) {
 //Обработка событий для модального окна редактирования профиля
 btnEdit.addEventListener("click", openPopupEdit);
 formEdit.addEventListener("submit", formEditSubmitHandler);
-closeBtnEdit.addEventListener("click", () => closeOpenPopup(popupEdit));
+closeBtnEdit.addEventListener("click", () => togglePopup(popupEdit));
 
 //Обработка событий для модального окна добавления карточки
-btnAdd.addEventListener("click", () => closeOpenPopup(popupAdd));
-closeBtnAdd.addEventListener("click", () => closeOpenPopup(popupAdd));
+btnAdd.addEventListener("click", () => togglePopup(popupAdd));
+closeBtnAdd.addEventListener("click", () => togglePopup(popupAdd));
 formAdd.addEventListener("submit", formAddSubmitHandler);
 
 //Обработка событий для модального окна с изображениями
-closeBtnView.addEventListener("click", () => closeOpenPopup(popupView));
+closeBtnView.addEventListener("click", () => togglePopup(popupView));
 
 loadingCards();
