@@ -74,6 +74,7 @@ function handleProfileFormSubmit(evt) {
 
   togglePopup(popupEdit);
 }
+
 //Функция создания новой карточки
 function createCard(namePlace, linkImg) {
   const cardTemplate = document.querySelector("#card-template").content;
@@ -130,8 +131,7 @@ function handleCardFormSubmit(evt) {
   evt.preventDefault();
   addCard(inputPlace.value, inputImg.value);
   togglePopup(popupAdd);
-  inputPlace.value = "";
-  inputImg.value = "";
+  evt.target.reset();
 }
 
 //Обработка событий для модального окна редактирования профиля
