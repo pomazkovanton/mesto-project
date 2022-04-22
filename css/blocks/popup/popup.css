@@ -8,7 +8,6 @@
   height: 100%;
   background: rgb(0 0 0 / 50%);
   display: flex;
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 0s, opacity 0.2s linear;
+  visibility: hidden;
+  opacity: 0;
 }

@@ -55,7 +55,7 @@ const initialCards = [
 
 //Функция закрытия/открытия модальных окон
 function togglePopup(popup) {
-  popup.classList.toggle("popup_hide");
+  popup.classList.toggle("popup_opened");
 }
 
 //Функция открытия окна редактирования профиля
