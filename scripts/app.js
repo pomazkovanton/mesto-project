@@ -74,9 +74,8 @@ function handleProfileFormSubmit(evt) {
 
   togglePopup(popupEdit);
 }
-
-//Функция добавления новой карточки
-function addCard(namePlace, linkImg) {
+//Функция создания новой карточки
+function createCard(namePlace, linkImg) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate
     .querySelector(".gallery__item")
@@ -109,6 +108,13 @@ function addCard(namePlace, linkImg) {
       popupViewCaption.textContent = evt.target.alt;
       togglePopup(popupView);
     });
+
+  return cardElement;
+}
+
+//Функция добавления новой карточки
+function addCard(namePlace, linkImg) {
+  const cardElement = createCard(namePlace, linkImg);
   cardsContainer.append(cardElement);
 }
 
