@@ -5,14 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="icon" href="./accets/images/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./css/pages/index.css" />
+    <link rel="icon" href="<%=require('./accets/images/favicon.svg')%>" type="image/svg+xml" />
   </head>
   <body class="page">
     <header class="header">
       <img
         class="header__logo"
-        src="./accets/images/header-logo.svg"
+        src="<%=require('./accets/images/header-logo.svg')%>"
         alt="Логотип сайта Mesto"
       />
     </header>
@@ -21,7 +20,7 @@
         <div class="profile__wrapper">
           <img
             class="profile__avatar"
-            src="./accets/images/profile-logo.jpg"
+            src="<%=require('./accets/images/profile-logo.jpg')%>"
             alt="Фото пользователя"
           />
           <div>
@@ -134,6 +133,5 @@
         ></button>
       </li>
     </template>
-    <script src="./scripts/app.js"></script>
   </body>
 </html>

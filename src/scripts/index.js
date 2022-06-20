@@ -1,3 +1,4 @@
+import '../css/pages/index.css'
 const btnEdit = document.querySelector(".profile__btn-edit");
 const btnAdd = document.querySelector(".profile__btn-add");
 
