@@ -2,6 +2,7 @@ import '../css/pages/index.css'
 const btnEdit = document.querySelector(".profile__btn-edit");
 const btnAdd = document.querySelector(".profile__btn-add");
 
+const popups = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
 const popupView = document.querySelector(".popup_type_view");
@@ -213,3 +214,12 @@ const toggleButtonState = (inputList, buttonElement) => {
 }
 
 enableValidation();
+
+popups.forEach(popup => {
+  popup.addEventListener('click', (evt) => {
+    const popupClass = evt.target.classList;
+    if (popupClass.contains('popup_opened')) {
+      popupClass.remove('popup_opened')
+    }
+  })
+})
