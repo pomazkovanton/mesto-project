@@ -53,12 +53,14 @@
     <div class="popup popup_type_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" action="#" method="post" name="formEdit">
+        <form class="popup__form" action="#" method="post" name="formEdit" novalidate>
           <input
             class="popup__form-input popup__form-input_type_name"
             type="text"
             placeholder="Введите ваше имя"
             name="userName"
+            minlength="2"
+            maxlength="40"
             required
           />
           <input
@@ -66,6 +68,8 @@
             type="text"
             placeholder="Введите вашу профессию"
             name="userPosition"
+            minlength="2"
+            maxlength="200"
             required
           />
           <button class="popup__form-btn" type="submit">Сохранить</button>
@@ -80,17 +84,19 @@
     <div class="popup popup_type_add">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" action="#" method="post" name="formAdd">
+        <form class="popup__form" action="#" method="post" name="formAdd" novalidate>
           <input
             class="popup__form-input popup__form-input_type_place"
             type="text"
             placeholder="Название"
             name="placeName"
+            minlength="2"
+            maxlength="30"
             required
           />
           <input
             class="popup__form-input popup__form-input_type_img"
-            type="text"
+            type="url"
             placeholder="Ссылка на картинку"
             name="placeImg"
             required
