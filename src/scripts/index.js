@@ -223,3 +223,10 @@ popups.forEach(popup => {
     }
   })
 })
+
+document.body.addEventListener('keyup', function (evt) {
+  const key = evt.key;
+  if (key === "Escape") {
+    popups.forEach( popup => popup.classList.remove('popup_opened'));
+  };
+});
