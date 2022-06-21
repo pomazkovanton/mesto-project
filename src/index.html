@@ -54,24 +54,32 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" action="#" method="post" name="formEdit" novalidate>
-          <input
-            class="popup__form-input popup__form-input_type_name"
-            type="text"
-            placeholder="Введите ваше имя"
-            name="userName"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <input
-            class="popup__form-input popup__form-input_type_position"
-            type="text"
-            placeholder="Введите вашу профессию"
-            name="userPosition"
-            minlength="2"
-            maxlength="200"
-            required
-          />
+          <label class="popup__form-label">
+            <input
+              id="name-input"
+              class="popup__form-input popup__form-input_type_name"
+              type="text"
+              placeholder="Введите ваше имя"
+              name="userName"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="name-input-error popup__form-error"></span>
+          </label>
+          <label class="popup__form-label">
+            <input
+              id="position-input"
+              class="popup__form-input popup__form-input_type_position"
+              type="text"
+              placeholder="Введите вашу профессию"
+              name="userPosition"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span class="position-input-error popup__form-error"></span>
+          </label>
           <button class="popup__form-btn" type="submit">Сохранить</button>
         </form>
         <button
@@ -85,22 +93,30 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" action="#" method="post" name="formAdd" novalidate>
-          <input
-            class="popup__form-input popup__form-input_type_place"
-            type="text"
-            placeholder="Название"
-            name="placeName"
-            minlength="2"
-            maxlength="30"
-            required
-          />
-          <input
-            class="popup__form-input popup__form-input_type_img"
-            type="url"
-            placeholder="Ссылка на картинку"
-            name="placeImg"
-            required
-          />
+          <label class="popup__form-label">
+            <input
+              id="place-input"
+              class="popup__form-input popup__form-input_type_place"
+              type="text"
+              placeholder="Название"
+              name="placeName"
+              minlength="2"
+              maxlength="30"
+              required
+            />
+            <span class="place-input-error popup__form-error"></span>
+          </label>
+          <label class="popup__form-label">
+            <input
+              id="img-input"
+              class="popup__form-input popup__form-input_type_img"
+              type="url"
+              placeholder="Ссылка на картинку"
+              name="placeImg"
+              required
+            />
+            <span class="img-input-error popup__form-error"></span>
+          </label>
           <button class="popup__form-btn" type="submit">Создать</button>
         </form>
         <button

@@ -2,5 +2,6 @@
   --main-color-dark: rgb(0 0 0);
   --main-color-light: rgb(255 255 255);
   --main-color-gray: rgb(84 84 84);
+  --error-color: rgb(255 0 0);
   --main-font: 'Inter', arial, sans-serif;
 }

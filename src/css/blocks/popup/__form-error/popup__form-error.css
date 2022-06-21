@@ -1,0 +1,17 @@
+.popup__form-error {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  font-family: var(--main-font);
+  color: var(--error-color);
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  z-index: 1;
+}

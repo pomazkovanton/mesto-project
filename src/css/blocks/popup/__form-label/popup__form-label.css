@@ -1,0 +1,9 @@
+.popup__form-label {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.popup__form-label:not(:first-child) {
+  margin-top: 35px;
+}
