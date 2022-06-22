@@ -150,19 +150,21 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => togglePopup(popup));
 });
 
-popups.forEach(popup => {
+// Закрытие модального окна кликом на overlay
+const handleOverlayClick = (popup) => {
   popup.addEventListener('click', (evt) => {
-    const popupClass = evt.target.classList;
-    if (popupClass.contains('popup_opened')) {
-      popupClass.remove('popup_opened')
+    if (evt.target === popup && popup.classList.contains('popup_opened')) {
+      closePopup(popup);
     }
   })
-})
+};
 
-document.body.addEventListener('keyup', function (evt) {
-  const key = evt.key;
-  if (key === "Escape") {
-    popups.forEach( popup => popup.classList.remove('popup_opened'));
+// Закрытие модального окна кликом на esc
+const handleEscUp = (evt) => {
+  const activePopup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(activePopup);
+  }
   };
 });
 
