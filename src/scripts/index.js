@@ -55,16 +55,23 @@ const initialCards = [
   },
 ];
 
-//Функция закрытия/открытия модальных окон
-function togglePopup(popup) {
-  popup.classList.toggle("popup_opened");
+//Функция открытия модального окна
+function openPopup(popup) {
+  document.addEventListener('keydown', handleEscUp);
+  popup.classList.add("popup_opened");
+}
+
+//Функция закрытия модального окна
+function closePopup(popup) {
+  document.removeEventListener('keydown', handleEscUp);
+  popup.classList.remove("popup_opened");
 }
 
 //Функция открытия окна редактирования профиля
 function openPopupEdit() {
   inputName.value = nameUser.textContent;
   inputPosition.value = positionUser.textContent;
-  togglePopup(popupEdit);
+  openPopup(popupEdit);
 }
 
 //Функция для обработки отправки формы изменения профиля
@@ -74,7 +81,7 @@ function handleProfileFormSubmit(evt) {
   nameUser.textContent = inputName.value;
   positionUser.textContent = inputPosition.value;
 
-  togglePopup(popupEdit);
+  closePopup(popupEdit);
 }
 
 //Функция создания новой карточки
@@ -109,7 +116,7 @@ function createCard(namePlace, linkImg) {
     popupViewImg.src = evt.target.src;
     popupViewImg.alt = evt.target.alt;
     popupViewCaption.textContent = evt.target.alt;
-    togglePopup(popupView);
+    openPopup(popupView);
   });
 
   return cardElement;
@@ -132,7 +139,7 @@ function renderCards() {
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
   addCard(inputPlace.value, inputImg.value);
-  togglePopup(popupAdd);
+  closePopup(popupAdd);
   evt.target.reset();
 }
 
@@ -141,14 +148,16 @@ btnEdit.addEventListener("click", openPopupEdit);
 formEdit.addEventListener("submit", handleProfileFormSubmit);
 
 //Обработка событий для модального окна добавления карточки
-btnAdd.addEventListener("click", () => togglePopup(popupAdd));
+btnAdd.addEventListener("click", () => openPopup(popupAdd));
 formAdd.addEventListener("submit", handleCardFormSubmit);
 
 //Обработка событий закрытия модальных окон
 closeButtons.forEach((button) => {
   const popup = button.closest(".popup"); // С помощью closest возвращает ближайщий родительский элемент
-  button.addEventListener("click", () => togglePopup(popup));
+  button.addEventListener("click", () => closePopup(popup));
 });
+
+
 
 // Закрытие модального окна кликом на overlay
 const handleOverlayClick = (popup) => {
@@ -165,8 +174,12 @@ const handleEscUp = (evt) => {
   if (evt.key === 'Escape') {
     closePopup(activePopup);
   }
-  };
-});
+};
+
+
+popups.forEach(popup => {
+  handleOverlayClick(popup);
+})
 
 
 renderCards();
