@@ -3,23 +3,25 @@ import enableValidation from './validate';
 import { renderCards, addCard } from './cards';
 import { openPopup, closePopup } from './popup';
 
+// Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
-const btnAdd = document.querySelector(".profile__btn-add");
-
-const popupEdit = document.querySelector(".popup_type_edit");
-const popupAdd = document.querySelector(".popup_type_add");
-
-
 const nameUser = document.querySelector(".profile__name");
 const positionUser = document.querySelector(".profile__position");
 
+// Переменные модального окна изменения профиля
+const popupEdit = document.querySelector(".popup_type_edit");
+const formEdit = popupEdit.querySelector(".popup__form");
 const inputName = popupEdit.querySelector(".popup__form-input_type_name");
 const inputPosition = popupEdit.querySelector(".popup__form-input_type_position");
+
+// Кнопка открытия модального окна добавления новой карточки
+const btnAdd = document.querySelector(".profile__btn-add");
+
+// Переменные модального окна добавления новой карточки
+const popupAdd = document.querySelector(".popup_type_add");
+const formAdd = popupAdd.querySelector(".popup__form");
 const inputPlace = popupAdd.querySelector(".popup__form-input_type_place");
 const inputImg = popupAdd.querySelector(".popup__form-input_type_img");
-
-const formEdit = popupEdit.querySelector(".popup__form");
-const formAdd = popupAdd.querySelector(".popup__form");
 
 const initialCards = [
   {
@@ -49,14 +51,14 @@ const initialCards = [
 ];
 
 //Функция открытия окна редактирования профиля
-function openPopupEdit() {
+const openPopupEdit = () => {
   inputName.value = nameUser.textContent;
   inputPosition.value = positionUser.textContent;
   openPopup(popupEdit);
 }
 
 //Функция для обработки отправки формы изменения профиля
-function handleProfileFormSubmit(evt) {
+const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
 
   nameUser.textContent = inputName.value;
@@ -66,7 +68,7 @@ function handleProfileFormSubmit(evt) {
 }
 
 //Функция для обработки отправки формы добавления новой карточки
-function handleCardFormSubmit(evt) {
+const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
 
   addCard(inputPlace.value, inputImg.value);

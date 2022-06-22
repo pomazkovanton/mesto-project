@@ -21,7 +21,7 @@ const resetInputError = (form) => {
   });
 };
 
-//Очитска поле формы и ошибок в Popup
+//Очитска поля формы и ошибок в Popup
 const handleCloseForm = (popup) => {
   const form = popup.querySelectorAll('.popup__form')[0];
   if (form) {
