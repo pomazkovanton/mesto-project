@@ -1,13 +1,15 @@
 import { openPopup } from "./popup";
 
-//Обработка переключателя лайков
-const handleCardLike = (evt) => {
-  evt.target.classList.toggle("gallery__btn-like_active");
+const gallary = document.querySelector('.gallery__list');
+
+//Переключение лайков
+const toggleLike = (like) => {
+  like.classList.toggle("gallery__btn-like_active");
 };
 
-//Обработка удаление карточки
-const handleDeleteCard = (evt) => {
-  evt.target.closest('.gallery__item').remove();
+//Удаление карточки
+const deleteCard = (button) => {
+  button.closest('.gallery__item').remove();
 };
 
 // Обработка открытия модального окна с изображением
@@ -31,18 +33,11 @@ function createCard(namePlace, linkImg) {
   const cardElement = cardTemplate.querySelector(".gallery__item").cloneNode(true);
   const galleryImg = cardElement.querySelector(".gallery__img");
   const galleryTitle = cardElement.querySelector(".gallery__item-title");
-  const likeBtn = cardElement.querySelector(".gallery__btn-like");
-  const deleteBtn = cardElement.querySelector(".gallery__btn-del");
 
   galleryImg.src = linkImg;
   galleryImg.alt = namePlace;
   galleryTitle.textContent = namePlace;
 
-  //Переключатель лайков
-  likeBtn.addEventListener("click", handleCardLike);
-  //Удаление карточки
-  deleteBtn.addEventListener("click", handleDeleteCard);
-  //Открытие модального окна с увеличенным изображением
   imagePopupOpeningHandler(galleryImg);
 
   return cardElement;
@@ -62,5 +57,18 @@ function renderCards(initialCards) {
     addCard(card.name, card.link);
   });
 }
+
+// Обработчик кликов галлерии картинок (лайки и удаление карточек)
+gallary.addEventListener('click', (evt) => {
+  const button = evt.target;
+
+  if (button.classList.contains('gallery__btn-like')) {
+    toggleLike(button);
+  }
+
+  if (button.classList.contains('gallery__btn-del')) {
+    deleteCard(button);
+  }
+});
 
 export {renderCards, addCard}
