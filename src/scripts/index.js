@@ -87,40 +87,46 @@ function handleProfileFormSubmit(evt) {
 //Функция создания новой карточки
 function createCard(namePlace, linkImg) {
   const cardTemplate = document.querySelector("#card-template").content;
-  const cardElement = cardTemplate
-    .querySelector(".gallery__item")
-    .cloneNode(true);
+  const cardElement = cardTemplate.querySelector(".gallery__item").cloneNode(true);
   const galleryImg = cardElement.querySelector(".gallery__img");
   const galleryTitle = cardElement.querySelector(".gallery__item-title");
+  const likeBtn = cardElement.querySelector(".gallery__btn-like");
+  const deleteBtn = cardElement.querySelector(".gallery__btn-del");
 
   galleryImg.src = linkImg;
   galleryImg.alt = namePlace;
   galleryTitle.textContent = namePlace;
 
-  //Обработка лайков
-  cardElement
-    .querySelector(".gallery__btn-like")
-    .addEventListener("click", function (evt) {
-      evt.target.classList.toggle("gallery__btn-like_active");
-    });
-
+  //Переключатель лайков
+  likeBtn.addEventListener("click", handleCardLike);
   //Удаление карточки
-  cardElement
-    .querySelector(".gallery__btn-del")
-    .addEventListener("click", function () {
-      cardElement.remove();
-    });
-
-  //Открытие модального окна с изображением
-  galleryImg.addEventListener("click", function (evt) {
-    popupViewImg.src = evt.target.src;
-    popupViewImg.alt = evt.target.alt;
-    popupViewCaption.textContent = evt.target.alt;
-    openPopup(popupView);
-  });
+  deleteBtn.addEventListener("click", handleDeleteCard);
+  //Открытие модального окна с увеличенным изображением
+  imagePopupOpeningHandler(galleryImg);
 
   return cardElement;
 }
+
+//Обработка переключателя лайков
+const handleCardLike = (evt) => {
+  evt.target.classList.toggle("gallery__btn-like_active");
+};
+
+//Обработка удаление карточки
+const handleDeleteCard = (evt) => {
+  evt.target.closest('.gallery__item').remove();
+};
+
+// Обработка открытия модального окна с изображением
+const imagePopupOpeningHandler = (galleryImg) => {
+  galleryImg.addEventListener('click', () => {
+    popupViewImg.src = galleryImg.src;
+    popupViewImg.alt = galleryImg.alt;
+    popupViewCaption.textContent = galleryImg.alt;
+
+    openPopup(popupView);
+  });
+};
 
 //Функция добавления новой карточки
 function addCard(namePlace, linkImg) {
@@ -156,8 +162,6 @@ closeButtons.forEach((button) => {
   const popup = button.closest(".popup"); // С помощью closest возвращает ближайщий родительский элемент
   button.addEventListener("click", () => closePopup(popup));
 });
-
-
 
 // Закрытие модального окна кликом на overlay
 const handleOverlayClick = (popup) => {
