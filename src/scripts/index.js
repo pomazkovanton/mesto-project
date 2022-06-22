@@ -65,6 +65,7 @@ function openPopup(popup) {
 function closePopup(popup) {
   document.removeEventListener('keydown', handleEscUp);
   popup.classList.remove("popup_opened");
+  handleCloseForm(popup);
 }
 
 //Функция открытия окна редактирования профиля
@@ -163,6 +164,15 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
+const handleCloseForm = (popup) => {
+  const form = popup.querySelectorAll('.popup__form')[0];
+
+  if (form) {
+    resetForm(form);
+    resetInputError(form);
+  }
+}
+
 // Закрытие модального окна кликом на overlay
 const handleOverlayClick = (popup) => {
   popup.addEventListener('click', (evt) => {
@@ -180,6 +190,25 @@ const handleEscUp = (evt) => {
   }
 };
 
+// Очистка полей формы
+const resetForm = (form) => {
+  form.reset();
+};
+
+// Сброс ошибок формы
+const resetInputError = (form) => {
+  const errorList = form.querySelectorAll('.popup__form-error');
+  const inputList = form.querySelectorAll('.popup__form-input');
+
+  inputList.forEach((element) => {
+    element.classList.remove('popup__form-input_type_error');
+  });
+
+  errorList.forEach((element) => {
+    element.classList.remove('popup__form-error_active');
+    element.textContent = '';
+  });
+};
 
 popups.forEach(popup => {
   handleOverlayClick(popup);
