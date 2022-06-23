@@ -3,6 +3,7 @@
 @import url("../vendor/variables.css");
 
 @import url("../blocks/page/page.css");
+@import url("../blocks/main/main.css");
 
 @import url("../blocks/container/container.css");
 
