@@ -50,13 +50,13 @@ const openPopupAdd = () => {
 }
 
 //Функция добавления новой карточки
-function addCard(namePlace, linkImg, selectorsCard) {
+const addCard = (namePlace, linkImg, selectorsCard) => {
   const card = createCard(namePlace, linkImg, selectorsCard);
   gallery.prepend(card);
 }
 
 //Функция отрисовки карточек
-function renderCards(initialCards) {
+const renderCards = (initialCards) => {
   initialCards.forEach((card) => {
     addCard(card.name, card.link, selectorsCard);
   });

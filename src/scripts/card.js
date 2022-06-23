@@ -16,7 +16,7 @@ const imagePopupOpeningHandler = (galleryImg, {popupSelector, popupImgSelector, 
 };
 
 //Функция создания новой карточки
-function createCard(namePlace, linkImg, {templateSelector, cardSelector, imgSelector, titleSelector, ...popupSelectors}) {
+const createCard = (namePlace, linkImg, {templateSelector, cardSelector, imgSelector, titleSelector, ...popupSelectors}) => {
   const cardTemplate = document.querySelector(templateSelector).content;
   const cardElement = cardTemplate.querySelector(cardSelector).cloneNode(true);
   const galleryImg = cardElement.querySelector(imgSelector);

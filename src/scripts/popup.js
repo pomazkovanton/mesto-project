@@ -26,7 +26,7 @@ const handleClearForm = (popup) => {
 }
 
 //Функция закрытия модального окна
-function closePopup(popup) {
+const closePopup = (popup) => {
   document.removeEventListener('keydown', handleEscUp);
   popup.classList.remove("popup_opened");
 }
@@ -49,7 +49,7 @@ const handleEscUp = (evt) => {
 };
 
 //Функция открытия модального окна
-function openPopup(popup) {
+const openPopup = (popup) => {
   document.addEventListener('keydown', handleEscUp);
   popup.classList.add("popup_opened");
 }
