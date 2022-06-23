@@ -1,7 +1,7 @@
 import '../css/pages/index.css';
-import {enableValidation, disablingButton} from './validate';
+import {enableValidation, disablingButton, handleClearForm} from './validate';
 import { createCard, handlerClickGallery } from './card';
-import { openPopup, closePopup, handleOverlayClick, handleClearForm } from './popup';
+import { openPopup, closePopup, handleOverlayClick } from './popup';
 import { initialCards, selectorsForm, selectorsCard } from './data';
 
 // Переменные профиля пользователя
@@ -35,17 +35,17 @@ const popups = document.querySelectorAll(".popup");
 
 //Функция открытия окна редактирования профиля
 const openPopupEdit = () => {
-  handleClearForm(popupEdit);
+  handleClearForm(popupEdit, selectorsForm);
   inputName.value = nameUser.textContent;
   inputPosition.value = positionUser.textContent;
-  disablingButton(btnSubmitEdit, selectorsForm.inactiveButtonClass);
+  disablingButton(btnSubmitEdit, selectorsForm.inactiveButtonSelector);
   openPopup(popupEdit);
 }
 
 //Функция открытия окна добавления карточки
 const openPopupAdd = () => {
-  disablingButton(btnSubmitAdd, selectorsForm.inactiveButtonClass);
-  handleClearForm(popupAdd);
+  disablingButton(btnSubmitAdd, selectorsForm.inactiveButtonSelector);
+  handleClearForm(popupAdd, selectorsForm);
   openPopup(popupAdd);
 }
 

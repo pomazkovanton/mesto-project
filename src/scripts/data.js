@@ -29,9 +29,10 @@ const selectorsForm = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
   submitButtonSelector: '.popup__form-btn',
-  inactiveButtonClass: 'popup__form-btn_inactive',
-  inputErrorClass: 'popup__form-input_type_error',
-  errorClass: 'popup__form-error_active'
+  inactiveButtonSelector: 'popup__form-btn_inactive',
+  inputErrorSelector: 'popup__form-input_type_error',
+  errorActiveSelector: 'popup__form-error_active',
+  errorSelector: '.popup__form-error'
 }
 
 const selectorsCard = {
