@@ -2,6 +2,7 @@ import '../css/pages/index.css';
 import enableValidation from './validate';
 import { renderCards, addCard } from './cards';
 import { openPopup, closePopup } from './popup';
+import { initialCards, selectorsForm } from './data';
 
 // Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
@@ -23,32 +24,7 @@ const formAdd = popupAdd.querySelector(".popup__form");
 const inputPlace = popupAdd.querySelector(".popup__form-input_type_place");
 const inputImg = popupAdd.querySelector(".popup__form-input_type_img");
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+
 
 //Функция открытия окна редактирования профиля
 const openPopupEdit = () => {
@@ -84,11 +60,4 @@ btnAdd.addEventListener("click", () => openPopup(popupAdd));
 formAdd.addEventListener("submit", handleCardFormSubmit);
 
 renderCards(initialCards);
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-input',
-  submitButtonSelector: '.popup__form-btn',
-  inactiveButtonClass: 'popup__form-btn_inactive',
-  inputErrorClass: 'popup__form-input_type_error',
-  errorClass: 'popup__form-error_active'
-});
+enableValidation(selectorsForm);
