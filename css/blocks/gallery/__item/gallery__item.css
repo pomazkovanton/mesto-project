@@ -1,6 +1,0 @@
-.gallery__item {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--main-color-light);
-  border-radius: 10px;
-}
