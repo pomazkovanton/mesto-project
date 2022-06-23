@@ -19,19 +19,16 @@ const resetInputError = (form) => {
 };
 
 //Очитска поля формы и ошибок в Popup
-const handleCloseForm = (popup) => {
-  const form = popup.querySelectorAll('.popup__form')[0];
-  if (form) {
-    resetForm(form);
-    resetInputError(form);
-  }
+const handleClearForm = (popup) => {
+  const form = popup.querySelector('.popup__form');
+  resetForm(form);
+  resetInputError(form);
 }
 
 //Функция закрытия модального окна
 function closePopup(popup) {
   document.removeEventListener('keydown', handleEscUp);
   popup.classList.remove("popup_opened");
-  handleCloseForm(popup);
 }
 
 // Закрытие модального окна кликом на overlay
@@ -57,4 +54,4 @@ function openPopup(popup) {
   popup.classList.add("popup_opened");
 }
 
-export {openPopup, closePopup, handleOverlayClick}
+export {openPopup, closePopup, handleOverlayClick, handleClearForm}
