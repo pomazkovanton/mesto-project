@@ -4,4 +4,5 @@
   object-fit: cover;
   aspect-ratio: 1/1;
   cursor: pointer;
+  flex-grow: 1;
 }
