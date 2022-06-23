@@ -1,8 +1,8 @@
 import '../css/pages/index.css';
 import {enableValidation, disablingButton} from './validate';
-import { renderCards, addCard } from './cards';
+import { createCard, handlerClickGallery } from './card';
 import { openPopup, closePopup } from './popup';
-import { initialCards, selectorsForm } from './data';
+import { initialCards, selectorsForm, selectorsCard } from './data';
 
 // Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
@@ -26,7 +26,8 @@ const btnSubmitAdd = formAdd.querySelector(selectorsForm.submitButtonSelector);
 const inputPlace = popupAdd.querySelector(".popup__form-input_type_place");
 const inputImg = popupAdd.querySelector(".popup__form-input_type_img");
 
-
+// Переменные галереи
+const gallery = document.querySelector('.gallery__list');
 
 //Функция открытия окна редактирования профиля
 const openPopupEdit = () => {
@@ -40,6 +41,19 @@ const openPopupEdit = () => {
 const openPopupAdd = () => {
   disablingButton(btnSubmitAdd, selectorsForm.inactiveButtonClass);
   openPopup(popupAdd);
+}
+
+//Функция добавления новой карточки
+function addCard(namePlace, linkImg, selectorsCard) {
+  const card = createCard(namePlace, linkImg, selectorsCard);
+  gallery.prepend(card);
+}
+
+//Функция отрисовки карточек
+function renderCards(initialCards) {
+  initialCards.forEach((card) => {
+    addCard(card.name, card.link, selectorsCard);
+  });
 }
 
 //Функция для обработки отправки формы изменения профиля
@@ -56,7 +70,7 @@ const handleProfileFormSubmit = (evt) => {
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
 
-  addCard(inputPlace.value, inputImg.value);
+  addCard(inputPlace.value, inputImg.value, selectorsCard);
   closePopup(popupAdd);
 }
 
@@ -67,6 +81,9 @@ formEdit.addEventListener("submit", handleProfileFormSubmit);
 //Обработка событий для модального окна добавления карточки
 btnAdd.addEventListener("click", openPopupAdd);
 formAdd.addEventListener("submit", handleCardFormSubmit);
+
+// Обработчик кликов галлерии картинок (лайки и удаление карточек)
+gallery.addEventListener('click', (evt) =>  handlerClickGallery(evt, selectorsCard));
 
 renderCards(initialCards);
 enableValidation(selectorsForm);

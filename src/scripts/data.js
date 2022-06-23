@@ -34,4 +34,17 @@ const selectorsForm = {
   errorClass: 'popup__form-error_active'
 }
 
-export {initialCards, selectorsForm}
+const selectorsCard = {
+  templateSelector: "#card-template",
+  cardSelector: ".gallery__item",
+  imgSelector: ".gallery__img",
+  titleSelector: ".gallery__item-title",
+  popupSelector: ".popup_type_view",
+  popupImgSelector: ".popup__figure-img",
+  popupCaptionSelector: ".popup__figure-caption",
+  btnLikeSelector: ".gallery__btn-like",
+  btnLikeActiveSelector: ".gallery__btn-like_active",
+  btnDelSelector: ".gallery__btn-del"
+}
+
+export {initialCards, selectorsForm, selectorsCard}
