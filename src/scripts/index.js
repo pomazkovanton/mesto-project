@@ -1,7 +1,7 @@
 import '../css/pages/index.css';
 import {enableValidation, disablingButton} from './validate';
 import { createCard, handlerClickGallery } from './card';
-import { openPopup, closePopup } from './popup';
+import { openPopup, closePopup, handleOverlayClick } from './popup';
 import { initialCards, selectorsForm, selectorsCard } from './data';
 
 // Переменные профиля пользователя
@@ -28,6 +28,10 @@ const inputImg = popupAdd.querySelector(".popup__form-input_type_img");
 
 // Переменные галереи
 const gallery = document.querySelector('.gallery__list');
+
+// Переменные модальных окон
+const closeButtons = document.querySelectorAll(".popup__btn-close");
+const popups = document.querySelectorAll(".popup");
 
 //Функция открытия окна редактирования профиля
 const openPopupEdit = () => {
@@ -84,6 +88,17 @@ formAdd.addEventListener("submit", handleCardFormSubmit);
 
 // Обработчик кликов галлерии картинок (лайки и удаление карточек)
 gallery.addEventListener('click', (evt) =>  handlerClickGallery(evt, selectorsCard));
+
+// Обработка событий закрытия модальных окон
+popups.forEach(popup => {
+  handleOverlayClick(popup);
+})
+
+//Обработка нажатия по кнопки закрытия модального окна
+closeButtons.forEach((button) => {
+  const popup = button.closest(".popup"); // С помощью closest возвращает ближайщий родительский элемент
+  button.addEventListener("click", () => closePopup(popup));
+});
 
 renderCards(initialCards);
 enableValidation(selectorsForm);

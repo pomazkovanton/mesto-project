@@ -1,6 +1,3 @@
-const closeButtons = document.querySelectorAll(".popup__btn-close");
-const popups = document.querySelectorAll(".popup");
-
 // Очистка полей формы
 const resetForm = (form) => {
   form.reset();
@@ -59,16 +56,5 @@ function openPopup(popup) {
   document.addEventListener('keydown', handleEscUp);
   popup.classList.add("popup_opened");
 }
-
-//Обработка событий закрытия модальных окон
-popups.forEach(popup => {
-  handleOverlayClick(popup);
-})
-
-//Обработка событий закрытия модальных окон
-closeButtons.forEach((button) => {
-  const popup = button.closest(".popup"); // С помощью closest возвращает ближайщий родительский элемент
-  button.addEventListener("click", () => closePopup(popup));
-});
 
 export {openPopup, closePopup, handleOverlayClick}
