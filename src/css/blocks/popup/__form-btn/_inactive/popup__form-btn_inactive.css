@@ -7,4 +7,5 @@
 
 .popup__form-btn_inactive:hover {
   background-color: var(--main-color-ligh);
+  cursor: auto;
 }
