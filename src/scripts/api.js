@@ -1,6 +1,6 @@
 import { configApi } from "./data";
 
-export const getUser = () => {
+const getUser = () => {
   return fetch(`${configApi.baseUrl}/users/me`,{
     headers: configApi.headers
   })
@@ -8,7 +8,21 @@ export const getUser = () => {
     if (res.ok) {
       return res.json();
     }
-    // если ошибка, отклоняем промис
     return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
+
+const getCards = () => {
+  return fetch(`${configApi.baseUrl}/cards`,{
+    headers: configApi.headers
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
+
+export {getCards, getUser}
+

@@ -2,8 +2,8 @@ import '../css/pages/index.css';
 import {enableValidation, disablingButton, handleClearForm} from './validate';
 import { createCard, handlerClickGallery } from './card';
 import { openPopup, closePopup, handleOverlayClick } from './popup';
-import { initialCards, selectorsForm, selectorsCard } from './data';
-import { getUser } from './api';
+import { selectorsForm, selectorsCard } from './data';
+import { getUser, getCards } from './api';
 
 // Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
@@ -58,8 +58,8 @@ const addCard = (namePlace, linkImg, selectorsCard) => {
 }
 
 //Функция отрисовки карточек
-const renderCards = (initialCards) => {
-  initialCards.forEach((card) => {
+const renderCards = (cards) => {
+  cards.forEach((card) => {
     addCard(card.name, card.link, selectorsCard);
   });
 }
@@ -104,10 +104,13 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-renderCards(initialCards);
+
 enableValidation(selectorsForm);
+
 getUser().then(({name, about, avatar}) => {
   nameUser.textContent = name;
   positionUser.textContent = about;
   avatarUser.src = avatar;
 })
+
+getCards().then( cards => renderCards(cards));
