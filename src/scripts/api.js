@@ -24,5 +24,22 @@ const getCards = () => {
   });
 }
 
-export {getCards, getUser}
+const postCards = (name, link) => {
+  return fetch(`${configApi.baseUrl}/cards`,{
+    method: 'POST',
+    body: JSON.stringify({
+      name: name,
+      link: link
+    }),
+    headers: configApi.headers
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
+
+export {getCards, getUser, postCards}
 
