@@ -3,11 +3,13 @@ import {enableValidation, disablingButton, handleClearForm} from './validate';
 import { createCard, handlerClickGallery } from './card';
 import { openPopup, closePopup, handleOverlayClick } from './popup';
 import { initialCards, selectorsForm, selectorsCard } from './data';
+import { getUser } from './api';
 
 // Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
 const nameUser = document.querySelector(".profile__name");
 const positionUser = document.querySelector(".profile__position");
+const avatarUser = document.querySelector(".profile__avatar");
 
 // Переменные модального окна изменения профиля
 const popupEdit = document.querySelector(".popup_type_edit");
@@ -104,3 +106,8 @@ closeButtons.forEach((button) => {
 
 renderCards(initialCards);
 enableValidation(selectorsForm);
+getUser().then(({name, about, avatar}) => {
+  nameUser.textContent = name;
+  positionUser.textContent = about;
+  avatarUser.src = avatar;
+})
