@@ -17,7 +17,7 @@ const selectorsCard = {
   popupImgSelector: ".popup__figure-img",
   popupCaptionSelector: ".popup__figure-caption",
   btnLikeSelector: ".gallery__btn-like",
-  btnLikeActiveSelector: ".gallery__btn-like_active",
+  btnLikeActiveSelector: "gallery__btn-like_active",
   btnDelSelector: ".gallery__btn-del",
   likeCounterSelector: ".gallery__like-counter",
 }

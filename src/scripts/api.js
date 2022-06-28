@@ -62,7 +62,7 @@ const updateUser = (name, about) => {
   });
 }
 
-// Обновление данных о пользователе на сервере
+// Удаление карточки на сервере
 const delCard = (cardID) => {
   return fetch(`${configApi.baseUrl}/cards/${cardID} `,{
     method: 'DELETE',
@@ -76,5 +76,32 @@ const delCard = (cardID) => {
   });
 }
 
-export {getCards, getUser, postCards, updateUser, delCard}
+// Добавление лайка
+const putLike = (cardID) => {
+  return fetch(`${configApi.baseUrl}/cards/likes/${cardID}`,{
+    method: 'PUT',
+    headers: configApi.headers
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
+
+// Удаление лайка
+const delLike = (cardID) => {
+  return fetch(`${configApi.baseUrl}/cards/likes/${cardID}`,{
+    method: 'DELETE',
+    headers: configApi.headers
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
+export {getCards, getUser, postCards, updateUser, delCard, putLike, delLike}
 

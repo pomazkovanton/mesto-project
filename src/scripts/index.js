@@ -1,6 +1,6 @@
 import '../css/pages/index.css';
 import {enableValidation, disablingButton, handleClearForm} from './validate';
-import { createCard, handlerClickGallery } from './card';
+import { createCard  } from './card';
 import { openPopup, closePopup, handleOverlayClick } from './popup';
 import { selectorsForm, selectorsCard } from './data';
 import { getUser, getCards, postCards, updateUser } from './api';
@@ -59,9 +59,8 @@ const addCard = (namePlace, linkImg, likes, cardID, userID, selectorsCard) => {
 
 //Функция отрисовки карточек
 const renderCards = (cards) => {
-
   cards.forEach(({name, link, likes, owner, _id}) => {
-    addCard(name, link, likes.length, _id, owner._id, selectorsCard)
+    addCard(name, link, likes, _id, owner._id, selectorsCard)
   });
 }
 
@@ -87,7 +86,7 @@ const handleCardFormSubmit = (evt) => {
 
   postCards(inputPlace.value, inputImg.value)
     .then( ({name, link, likes, _id, owner}) => {
-      addCard(name, link, likes.length, _id, owner._id, selectorsCard);
+      addCard(name, link, likes, _id, owner._id, selectorsCard);
     })
     .catch((err) => {
       console.log(err);
@@ -103,9 +102,6 @@ formEdit.addEventListener("submit", handleProfileFormSubmit);
 //Обработка событий для модального окна добавления карточки
 btnAdd.addEventListener("click", openPopupAdd);
 formAdd.addEventListener("submit", handleCardFormSubmit);
-
-// Обработчик кликов галлерии картинок (лайки и удаление карточек)
-gallery.addEventListener('click', (evt) =>  handlerClickGallery(evt, selectorsCard));
 
 // Обработка событий закрытия модальных окон
 popups.forEach(popup => {
