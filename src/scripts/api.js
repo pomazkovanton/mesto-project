@@ -62,5 +62,19 @@ const updateUser = (name, about) => {
   });
 }
 
-export {getCards, getUser, postCards, updateUser}
+// Обновление данных о пользователе на сервере
+const delCard = (cardID) => {
+  return fetch(`${configApi.baseUrl}/cards/${cardID} `,{
+    method: 'DELETE',
+    headers: configApi.headers
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
+
+export {getCards, getUser, postCards, updateUser, delCard}
 

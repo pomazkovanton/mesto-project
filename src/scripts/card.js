@@ -1,4 +1,5 @@
 import { openPopup } from "./popup";
+import {delCard} from './api';
 
 // Обработка открытия модального окна с изображением
 const imagePopupOpeningHandler = (galleryImg, {popupSelector, popupImgSelector, popupCaptionSelector}) => {
@@ -16,7 +17,7 @@ const imagePopupOpeningHandler = (galleryImg, {popupSelector, popupImgSelector, 
 };
 
 //Функция создания новой карточки
-const createCard = (namePlace, linkImg, likes, deleteBtnClasses, {templateSelector, cardSelector, imgSelector, titleSelector, likeCounterSelector, btnDelSelector, ...popupSelectors}) => {
+const createCard = (namePlace, linkImg, likes, deleteBtnClasses, cardID, {templateSelector, cardSelector, imgSelector, titleSelector, likeCounterSelector, btnDelSelector, ...popupSelectors}) => {
   const cardTemplate = document.querySelector(templateSelector).content;
   const cardElement = cardTemplate.querySelector(cardSelector).cloneNode(true);
   const galleryImg = cardElement.querySelector(imgSelector);
@@ -24,6 +25,7 @@ const createCard = (namePlace, linkImg, likes, deleteBtnClasses, {templateSelect
   const galleryLikeCounter = cardElement.querySelector(likeCounterSelector);
   const deleteBtn = cardElement.querySelector(btnDelSelector);
 
+  cardElement.id = cardID;
   deleteBtn.classList = deleteBtnClasses;
   galleryImg.src = linkImg;
   galleryImg.alt = namePlace;
@@ -42,7 +44,9 @@ const toggleLike = (button, {btnLikeActiveSelector}) => {
 
 //Удаление карточки
 const deleteCard = (button, {cardSelector}) => {
-  button.closest(cardSelector).remove();
+  const card = button.closest(cardSelector);
+  delCard(card.id).catch(err => console.log(err));
+  card.remove();
 };
 
 const handlerClickGallery  = (evt, { btnLikeSelector, btnDelSelector, ...selectors }) => {
