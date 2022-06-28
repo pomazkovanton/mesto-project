@@ -3,7 +3,7 @@ import {enableValidation, disablingButton, handleClearForm} from './validate';
 import { createCard, handlerClickGallery } from './card';
 import { openPopup, closePopup, handleOverlayClick } from './popup';
 import { selectorsForm, selectorsCard } from './data';
-import { getUser, getCards, postCards } from './api';
+import { getUser, getCards, postCards, updateUser } from './api';
 
 // Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
@@ -68,8 +68,14 @@ const renderCards = (cards) => {
 const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
 
-  nameUser.textContent = inputName.value;
-  positionUser.textContent = inputPosition.value;
+  updateUser(inputName.value, inputPosition.value)
+    .then( ({name, about}) => {
+      nameUser.textContent = name;
+      positionUser.textContent = about;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   closePopup(popupEdit);
 }
