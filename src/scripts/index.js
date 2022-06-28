@@ -78,9 +78,13 @@ const handleProfileFormSubmit = (evt) => {
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
 
-  postCards(inputPlace.value, inputImg.value).then( ({name, link}) => {
-    addCard(name, link, selectorsCard);
-  });
+  postCards(inputPlace.value, inputImg.value)
+    .then( ({name, link}) => {
+      addCard(name, link, selectorsCard);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   closePopup(popupAdd);
 }
@@ -110,10 +114,18 @@ closeButtons.forEach((button) => {
 
 enableValidation(selectorsForm);
 
-getUser().then(({name, about, avatar}) => {
-  nameUser.textContent = name;
-  positionUser.textContent = about;
-  avatarUser.src = avatar;
-})
+getUser()
+  .then(({name, about, avatar}) => {
+    nameUser.textContent = name;
+    positionUser.textContent = about;
+    avatarUser.src = avatar;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
-getCards().then( cards => renderCards(cards));
+getCards()
+  .then( cards => renderCards(cards))
+  .catch((err) => {
+    console.log(err);
+  });
