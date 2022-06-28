@@ -1,5 +1,6 @@
 import { openPopup } from "./popup";
 import {delCard} from './api';
+import {configApi} from './data';
 
 // Обработка открытия модального окна с изображением
 const imagePopupOpeningHandler = (galleryImg, {popupSelector, popupImgSelector, popupCaptionSelector}) => {
@@ -17,7 +18,7 @@ const imagePopupOpeningHandler = (galleryImg, {popupSelector, popupImgSelector, 
 };
 
 //Функция создания новой карточки
-const createCard = (namePlace, linkImg, likes, deleteBtnClasses, cardID, {templateSelector, cardSelector, imgSelector, titleSelector, likeCounterSelector, btnDelSelector, ...popupSelectors}) => {
+const createCard = (namePlace, linkImg, likes, cardID, userID, {templateSelector, cardSelector, imgSelector, titleSelector, likeCounterSelector, btnDelSelector, ...popupSelectors}) => {
   const cardTemplate = document.querySelector(templateSelector).content;
   const cardElement = cardTemplate.querySelector(cardSelector).cloneNode(true);
   const galleryImg = cardElement.querySelector(imgSelector);
@@ -25,8 +26,11 @@ const createCard = (namePlace, linkImg, likes, deleteBtnClasses, cardID, {templa
   const galleryLikeCounter = cardElement.querySelector(likeCounterSelector);
   const deleteBtn = cardElement.querySelector(btnDelSelector);
 
+  if (userID !== configApi.userID) {
+    deleteBtn.remove();
+  }
+
   cardElement.id = cardID;
-  deleteBtn.classList = deleteBtnClasses;
   galleryImg.src = linkImg;
   galleryImg.alt = namePlace;
   galleryTitle.textContent = namePlace;

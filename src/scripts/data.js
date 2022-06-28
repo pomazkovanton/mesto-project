@@ -20,8 +20,6 @@ const selectorsCard = {
   btnLikeActiveSelector: ".gallery__btn-like_active",
   btnDelSelector: ".gallery__btn-del",
   likeCounterSelector: ".gallery__like-counter",
-  btnDelShowClasses: "gallery__btn-del gallery__btn-del_show",
-  btnDelHideClasses: "gallery__btn-del",
 }
 
 const configApi = {
@@ -29,7 +27,8 @@ const configApi = {
   headers: {
     authorization: '625c1c0f-02ec-4f48-b7e0-8363adbe96f2',
     'Content-Type': 'application/json'
-  }
+  },
+  userID: 'e3b36aa9f43e33b0b6c90f60'
 }
 
 export { selectorsForm, selectorsCard, configApi}

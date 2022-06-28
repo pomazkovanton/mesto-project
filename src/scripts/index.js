@@ -52,19 +52,16 @@ const openPopupAdd = () => {
 }
 
 //Функция добавления новой карточки
-const addCard = (namePlace, linkImg, likes, deleteBtnClasses, cardID, selectorsCard) => {
-  const card = createCard(namePlace, linkImg, likes, deleteBtnClasses, cardID, selectorsCard);
+const addCard = (namePlace, linkImg, likes, cardID, userID, selectorsCard) => {
+  const card = createCard(namePlace, linkImg, likes, cardID, userID, selectorsCard);
   gallery.prepend(card);
 }
 
 //Функция отрисовки карточек
 const renderCards = (cards) => {
-  const userID = "e3b36aa9f43e33b0b6c90f60";
+
   cards.forEach(({name, link, likes, owner, _id}) => {
-    //Условная отрисовка кнопки удаления карточки (только для своих карточек)
-    userID === owner._id
-      ? addCard(name, link, likes.length, selectorsCard.btnDelShowClasses,  _id, selectorsCard)
-      : addCard(name, link, likes.length, selectorsCard.btnDelHideClasses,  _id, selectorsCard)
+    addCard(name, link, likes.length, _id, owner._id, selectorsCard)
   });
 }
 
@@ -89,8 +86,8 @@ const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
 
   postCards(inputPlace.value, inputImg.value)
-    .then( ({name, link, likes, _id}) => {
-      addCard(name, link, likes.length, selectorsCard.btnDelShowClasses, _id, selectorsCard);
+    .then( ({name, link, likes, _id, owner}) => {
+      addCard(name, link, likes.length, _id, owner._id, selectorsCard);
     })
     .catch((err) => {
       console.log(err);
