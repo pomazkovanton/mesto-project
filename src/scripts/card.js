@@ -16,15 +16,17 @@ const imagePopupOpeningHandler = (galleryImg, {popupSelector, popupImgSelector, 
 };
 
 //Функция создания новой карточки
-const createCard = (namePlace, linkImg, {templateSelector, cardSelector, imgSelector, titleSelector, ...popupSelectors}) => {
+const createCard = (namePlace, linkImg, likes, {templateSelector, cardSelector, imgSelector, titleSelector, likeCounterSelector, ...popupSelectors}) => {
   const cardTemplate = document.querySelector(templateSelector).content;
   const cardElement = cardTemplate.querySelector(cardSelector).cloneNode(true);
   const galleryImg = cardElement.querySelector(imgSelector);
   const galleryTitle = cardElement.querySelector(titleSelector);
+  const galleryLikeCounter = cardElement.querySelector(likeCounterSelector);
 
   galleryImg.src = linkImg;
   galleryImg.alt = namePlace;
   galleryTitle.textContent = namePlace;
+  galleryLikeCounter.textContent = likes;
 
   imagePopupOpeningHandler(galleryImg, popupSelectors);
 
