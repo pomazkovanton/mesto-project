@@ -19,7 +19,9 @@ const selectorsCard = {
   btnLikeSelector: ".gallery__btn-like",
   btnLikeActiveSelector: ".gallery__btn-like_active",
   btnDelSelector: ".gallery__btn-del",
-  likeCounterSelector: ".gallery__like-counter"
+  likeCounterSelector: ".gallery__like-counter",
+  btnDelShowClasses: "gallery__btn-del gallery__btn-del_show",
+  btnDelHideClasses: "gallery__btn-del",
 }
 
 const configApi = {

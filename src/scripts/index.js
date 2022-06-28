@@ -52,15 +52,20 @@ const openPopupAdd = () => {
 }
 
 //Функция добавления новой карточки
-const addCard = (namePlace, linkImg, likes, selectorsCard) => {
-  const card = createCard(namePlace, linkImg, likes, selectorsCard);
+const addCard = (namePlace, linkImg, likes, deleteBtnClasses, selectorsCard) => {
+  const card = createCard(namePlace, linkImg, likes, deleteBtnClasses, selectorsCard);
   gallery.prepend(card);
 }
 
 //Функция отрисовки карточек
 const renderCards = (cards) => {
-  cards.forEach(({name, link, likes}) => {
-    addCard(name, link, likes.length, selectorsCard);
+  const userID = "e3b36aa9f43e33b0b6c90f60";
+
+  cards.forEach(({name, link, likes, owner}) => {
+    //Условная отрисовка кнопки удаления карточки (только для своих карточек)
+    userID === owner._id
+      ? addCard(name, link, likes.length, selectorsCard.btnDelShowClasses, selectorsCard)
+      : addCard(name, link, likes.length, selectorsCard.btnDelHideClasses, selectorsCard)
   });
 }
 
@@ -86,7 +91,7 @@ const handleCardFormSubmit = (evt) => {
 
   postCards(inputPlace.value, inputImg.value)
     .then( ({name, link, likes}) => {
-      addCard(name, link, likes.length, selectorsCard);
+      addCard(name, link, likes.length, selectorsCard.btnDelShowClasses, selectorsCard);
     })
     .catch((err) => {
       console.log(err);
@@ -117,9 +122,10 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-
+// Включение валидации
 enableValidation(selectorsForm);
 
+//Получение данных о пользователе с сервера
 getUser()
   .then(({name, about, avatar}) => {
     nameUser.textContent = name;
@@ -130,6 +136,7 @@ getUser()
     console.log(err);
   });
 
+  //Получение карточек с сервера
 getCards()
   .then( cards => renderCards(cards))
   .catch((err) => {

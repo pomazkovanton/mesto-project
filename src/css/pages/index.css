@@ -30,6 +30,7 @@
 @import url("../blocks/gallery/__like-counter/gallery__like-counter.css");
 @import url("../blocks/gallery/__btn-like/_active/gallery__btn-like_active.css");
 @import url("../blocks/gallery/__btn-del/gallery__btn-del.css");
+@import url("../blocks/gallery/__btn-del/_show/gallery__btn-del_show.css");
 
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copyright/footer__copyright.css");
