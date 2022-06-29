@@ -61,6 +61,22 @@ const updateUser = (name, about) => {
     return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
+// Смена аватара на сервере
+const updateAvatar = (avatar) => {
+  return fetch(`${configApi.baseUrl}/users/me/avatar`,{
+    method: 'PATCH',
+    body: JSON.stringify({
+      avatar: avatar
+    }),
+    headers: configApi.headers
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
 
 // Удаление карточки на сервере
 const delCard = (cardID) => {
@@ -103,5 +119,5 @@ const delLike = (cardID) => {
     return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
-export {getCards, getUser, postCards, updateUser, delCard, putLike, delLike}
+export {getCards, getUser, postCards, updateUser, delCard, putLike, delLike, updateAvatar}
 
