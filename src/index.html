@@ -128,6 +128,30 @@
         ></button>
       </div>
     </div>
+    <div class="popup popup_type_avatar">
+      <div class="popup__container">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" action="#" method="post" name="formAvatar" novalidate>
+          <label class="popup__form-label">
+            <input
+              id="avatar-input"
+              class="popup__form-input popup__form-input_type_avatar"
+              type="url"
+              placeholder="Ссылка на аватар"
+              name="avatar"
+              required
+            />
+            <span class="avatar-input-error popup__form-error"></span>
+          </label>
+          <button class="popup__form-btn" type="submit">Сохранить</button>
+        </form>
+        <button
+          class="popup__btn-close"
+          type="button"
+          aria-label="Закрыть модальное окно"
+        ></button>
+      </div>
+    </div>
     <div class="popup popup_type_view">
       <figure class="popup__figure">
         <img class="popup__figure-img" src="#" alt="#" />

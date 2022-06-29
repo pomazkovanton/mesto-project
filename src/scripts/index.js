@@ -7,9 +7,16 @@ import { getUser, getCards, postCards, updateUser } from './api';
 
 // Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
+const btnEditAvatar = document.querySelector(".profile__edit-avatar");
 const nameUser = document.querySelector(".profile__name");
 const positionUser = document.querySelector(".profile__position");
 const avatarUser = document.querySelector(".profile__avatar");
+
+// Переменные модального окна изменения аватара пользователя
+const popupEditAvatar = document.querySelector(".popup_type_avatar");
+const formEditAvatar = popupEditAvatar.querySelector(".popup__form");
+const btnSubmitEditAvatar = formEditAvatar.querySelector(selectorsForm.submitButtonSelector);
+const inputAvatarSrc = formEditAvatar.querySelector(".popup__form-input_type_avatar");
 
 // Переменные модального окна изменения профиля
 const popupEdit = document.querySelector(".popup_type_edit");
@@ -42,6 +49,13 @@ const openPopupEdit = () => {
   inputPosition.value = positionUser.textContent;
   disablingButton(btnSubmitEdit, selectorsForm.inactiveButtonSelector);
   openPopup(popupEdit);
+}
+
+//Функция открытия окна изменения аватара
+const openPopupEditAvatar = () => {
+  handleClearForm(popupEditAvatar, selectorsForm);
+  disablingButton(btnSubmitEditAvatar, selectorsForm.inactiveButtonSelector);
+  openPopup(popupEditAvatar);
 }
 
 //Функция открытия окна добавления карточки
@@ -94,6 +108,18 @@ const handleCardFormSubmit = (evt) => {
 
   closePopup(popupAdd);
 }
+
+const handleAvatarFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  avatarUser.src = inputAvatarSrc.value;
+
+  closePopup(popupEditAvatar);
+}
+
+//Обработка событий для модального окна изменения аватара пользователя
+btnEditAvatar.addEventListener("click", openPopupEditAvatar);
+formEditAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
 //Обработка событий для модального окна редактирования профиля
 btnEdit.addEventListener("click", openPopupEdit);
