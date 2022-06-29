@@ -42,6 +42,17 @@ const gallery = document.querySelector('.gallery__list');
 const closeButtons = document.querySelectorAll(".popup__btn-close");
 const popups = document.querySelectorAll(".popup");
 
+const renderLoading = (isLoading = false, typeBtnSubmit) => {
+  const button = document.querySelector(`.popup__form-btn_type_${typeBtnSubmit}`);
+  isLoading ? button.textContent = 'Сохранение...' : button.textContent = 'Сохранить';
+}
+
+const delay = (ms) => {
+  return new Promise( res => {
+    setTimeout(res, ms);
+  })
+}
+
 //Функция открытия окна редактирования профиля
 const openPopupEdit = () => {
   handleClearForm(popupEdit, selectorsForm);
@@ -81,6 +92,7 @@ const renderCards = (cards) => {
 //Функция для обработки отправки формы изменения профиля
 const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
+  renderLoading(true, 'edit');
 
   updateUser(inputName.value, inputPosition.value)
     .then( ({name, about}) => {
@@ -89,7 +101,8 @@ const handleProfileFormSubmit = (evt) => {
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally( () => renderLoading(false, 'edit'))
 
   closePopup(popupEdit);
 }
@@ -98,19 +111,25 @@ const handleProfileFormSubmit = (evt) => {
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
 
+  renderLoading(true, 'add');
+
   postCards(inputPlace.value, inputImg.value)
     .then( ({name, link, likes, _id, owner}) => {
       addCard(name, link, likes, _id, owner._id, selectorsCard);
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally( () => renderLoading(false, 'add'))
 
-  closePopup(popupAdd);
+   closePopup(popupAdd);
 }
 
+//Функция для обработки отправки формы изменения аватара пользователя
 const handleAvatarFormSubmit = (evt) => {
   evt.preventDefault();
+
+  renderLoading(true, 'avatar');
 
   updateAvatar(inputAvatarSrc.value)
     .then( ({avatar}) => {
@@ -118,7 +137,8 @@ const handleAvatarFormSubmit = (evt) => {
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally( () => renderLoading(false, 'avatar'))
 
   closePopup(popupEditAvatar);
 }
