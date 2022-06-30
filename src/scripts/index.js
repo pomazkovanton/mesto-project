@@ -77,15 +77,15 @@ const openPopupAdd = () => {
 }
 
 //Функция добавления новой карточки
-const addCard = (namePlace, linkImg, likes, cardID, userID, selectorsCard) => {
-  const card = createCard(namePlace, linkImg, likes, cardID, userID, selectorsCard);
+const addCard = (namePlace, linkImg, likes, cardID, userID) => {
+  const card = createCard(namePlace, linkImg, likes, cardID, userID);
   gallery.prepend(card);
 }
 
 //Функция отрисовки карточек
 const renderCards = (cards) => {
   cards.forEach(({name, link, likes, owner, _id}) => {
-    addCard(name, link, likes, _id, owner._id, selectorsCard)
+    addCard(name, link, likes, _id, owner._id)
   });
 }
 
@@ -115,7 +115,7 @@ const handleCardFormSubmit = (evt) => {
 
   postCards(inputPlace.value, inputImg.value)
     .then( ({name, link, likes, _id, owner}) => {
-      addCard(name, link, likes, _id, owner._id, selectorsCard);
+      addCard(name, link, likes, _id, owner._id);
     })
     .catch((err) => {
       console.log(err);
