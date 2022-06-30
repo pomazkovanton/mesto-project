@@ -176,7 +176,7 @@ getUser()
 
   //Получение карточек с сервера
 getCards()
-  .then( cards => renderCards(cards))
+  .then( cards => renderCards(cards.reverse()))
   .catch((err) => {
     console.log(err);
   });
