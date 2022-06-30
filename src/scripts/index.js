@@ -94,13 +94,12 @@ const handleProfileFormSubmit = (evt) => {
     .then( ({name, about}) => {
       nameUser.textContent = name;
       positionUser.textContent = about;
+      closePopup(popupEdit);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally( () => renderLoading(false, 'edit'))
-
-  closePopup(popupEdit);
 }
 
 //Функция для обработки отправки формы добавления новой карточки
@@ -112,13 +111,12 @@ const handleCardFormSubmit = (evt) => {
   postCards(inputPlace.value, inputImg.value)
     .then( ({name, link, likes, _id, owner}) => {
       addCard(name, link, likes, _id, owner._id);
+      closePopup(popupAdd);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally( () => renderLoading(false, 'add'))
-
-   closePopup(popupAdd);
 }
 
 //Функция для обработки отправки формы изменения аватара пользователя
@@ -130,13 +128,12 @@ const handleAvatarFormSubmit = (evt) => {
   updateAvatar(inputAvatarSrc.value)
     .then( ({avatar}) => {
       avatarUser.src = avatar;
+      closePopup(popupEditAvatar);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally( () => renderLoading(false, 'avatar'))
-
-  closePopup(popupEditAvatar);
 }
 
 //Обработка событий для модального окна изменения аватара пользователя
