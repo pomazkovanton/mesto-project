@@ -49,12 +49,6 @@ const renderLoading = (isLoading = false, typeBtnSubmit) => {
   isLoading ? button.textContent = 'Сохранение...' : button.textContent = 'Сохранить';
 }
 
-const delay = (ms) => {
-  return new Promise( res => {
-    setTimeout(res, ms);
-  })
-}
-
 //Функция открытия окна редактирования профиля
 const openPopupEdit = () => {
   handleClearForm(popupEdit, selectorsForm);
