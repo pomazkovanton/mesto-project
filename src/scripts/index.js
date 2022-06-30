@@ -2,8 +2,10 @@ import '../css/pages/index.css';
 import {enableValidation, disablingButton, handleClearForm} from './validate';
 import { createCard  } from './card';
 import { openPopup, closePopup, handleOverlayClick } from './popup';
-import { selectorsForm, selectorsCard } from './data';
+import { selectorsForm } from './data';
 import { getUser, getCards, postCards, updateUser, updateAvatar } from './api';
+
+let myID = '';
 
 // Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
@@ -78,7 +80,7 @@ const openPopupAdd = () => {
 
 //Функция добавления новой карточки
 const addCard = (namePlace, linkImg, likes, cardID, userID) => {
-  const card = createCard(namePlace, linkImg, likes, cardID, userID);
+  const card = createCard(namePlace, linkImg, likes, cardID, userID, myID);
   gallery.prepend(card);
 }
 
@@ -171,7 +173,8 @@ enableValidation(selectorsForm);
 
 //Получение данных о пользователе с сервера
 getUser()
-  .then(({name, about, avatar}) => {
+  .then(({name, about, avatar, _id}) => {
+    myID = _id;
     nameUser.textContent = name;
     positionUser.textContent = about;
     avatarUser.src = avatar;

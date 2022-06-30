@@ -1,6 +1,6 @@
 import { openPopup } from "./popup";
 import {delCard, putLike, delLike} from './api';
-import {configApi, selectorsCard} from './data';
+import {selectorsCard} from './data';
 
 const cardTemplate = document.querySelector(selectorsCard.templateSelector).content;
 const popupView = document.querySelector(selectorsCard.popupSelector);
@@ -40,16 +40,16 @@ const handlerDeleteLikes = (card, like, activeClass, counter) => {
 }
 
 //Функция создания новой карточки
-const createCard = (namePlace, linkImg, likes, cardID, userID) => {
+const createCard = (namePlace, linkImg, likes, cardID, userID, myID) => {
   const cardElement = cardTemplate.querySelector(selectorsCard.cardSelector).cloneNode(true);
   const galleryImg = cardElement.querySelector(selectorsCard.imgSelector);
   const galleryTitle = cardElement.querySelector(selectorsCard.titleSelector);
   const galleryLikeCounter = cardElement.querySelector(selectorsCard.likeCounterSelector);
   const deleteBtn = cardElement.querySelector(selectorsCard.btnDelSelector);
   const likeBtn = cardElement.querySelector(selectorsCard.btnLikeSelector);
-  const isLike = likes.find(like => like._id === configApi.userID) === undefined ? false : true;
+  const isLike = likes.find(like => like._id === myID) === undefined ? false : true;
 
-  if (userID !== configApi.userID) {
+  if (userID !== myID) {
     deleteBtn.remove();
   }
 
