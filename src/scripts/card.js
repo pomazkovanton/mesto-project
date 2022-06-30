@@ -21,17 +21,21 @@ const imagePopupOpeningHandler = (galleryImg) => {
 
 //Обработчик добавления лайков
 const handlerAddingLikes = (card, like, activeClass, counter) => {
-  like.classList.add(activeClass);
   putLike(card)
-    .then(data => counter.textContent = data.likes.length )
+    .then(data => {
+      like.classList.add(activeClass);
+      counter.textContent = data.likes.length;
+    })
     .catch(err => console.log(err));
 }
 
 //Обработчик удаления лайков
 const handlerDeleteLikes = (card, like, activeClass, counter) => {
-  like.classList.remove(activeClass);
   delLike(card)
-    .then(data => counter.textContent = data.likes.length )
+    .then(data => {
+      like.classList.remove(activeClass);
+      counter.textContent = data.likes.length;
+    })
     .catch(err => console.log(err));
 }
 
@@ -71,8 +75,9 @@ const createCard = (namePlace, linkImg, likes, cardID, userID) => {
 
   // Обработчик удаления карточки
   deleteBtn.addEventListener('click', () => {
-    delCard(cardID).catch(err => console.log(err));
-    cardElement.remove();
+    delCard(cardID)
+      .then( () => cardElement.remove())
+      .catch(err => console.log(err));
   })
 
   return cardElement;
