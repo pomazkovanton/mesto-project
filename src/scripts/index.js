@@ -162,21 +162,15 @@ closeButtons.forEach((button) => {
 // Включение валидации
 enableValidation(selectorsForm);
 
-//Получение данных о пользователе с сервера
-getUser()
-  .then(({name, about, avatar, _id}) => {
+//Получение карточек и данных о пользователе с сервера
+Promise.all([getUser(), getCards()])
+  .then(([{name, about, avatar, _id}, cards]) => {
     myID = _id;
     nameUser.textContent = name;
     positionUser.textContent = about;
     avatarUser.src = avatar;
+    renderCards(cards.reverse())
   })
-  .catch((err) => {
-    console.log(err);
-  });
-
-  //Получение карточек с сервера
-getCards()
-  .then( cards => renderCards(cards.reverse()))
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch(error => {
+    console.error(error)
+  })
