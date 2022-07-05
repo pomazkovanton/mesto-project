@@ -1,12 +1,14 @@
 import { openPopup } from "./popup";
 import {delCard, putLike, delLike} from './api';
-import {configApi} from './data';
+import {selectorsCard} from './data';
+
+const cardTemplate = document.querySelector(selectorsCard.templateSelector).content;
+const popupView = document.querySelector(selectorsCard.popupSelector);
+const popupViewImg = popupView.querySelector(selectorsCard.popupImgSelector);
+const popupViewCaption = popupView.querySelector(selectorsCard.popupCaptionSelector);
 
 // Обработка открытия модального окна с изображением
-const imagePopupOpeningHandler = (galleryImg, {popupSelector, popupImgSelector, popupCaptionSelector}) => {
-  const popupView = document.querySelector(popupSelector);
-  const popupViewImg = popupView.querySelector(popupImgSelector);
-  const popupViewCaption = popupView.querySelector(popupCaptionSelector);
+const imagePopupOpeningHandler = (galleryImg) => {
 
   galleryImg.addEventListener('click', () => {
     popupViewImg.src = galleryImg.src;
@@ -19,37 +21,40 @@ const imagePopupOpeningHandler = (galleryImg, {popupSelector, popupImgSelector, 
 
 //Обработчик добавления лайков
 const handlerAddingLikes = (card, like, activeClass, counter) => {
-  like.classList.add(activeClass);
   putLike(card)
-    .then(data => counter.textContent = data.likes.length )
+    .then(data => {
+      like.classList.add(activeClass);
+      counter.textContent = data.likes.length;
+    })
     .catch(err => console.log(err));
 }
 
 //Обработчик удаления лайков
 const handlerDeleteLikes = (card, like, activeClass, counter) => {
-  like.classList.remove(activeClass);
   delLike(card)
-    .then(data => counter.textContent = data.likes.length )
+    .then(data => {
+      like.classList.remove(activeClass);
+      counter.textContent = data.likes.length;
+    })
     .catch(err => console.log(err));
 }
 
 //Функция создания новой карточки
-const createCard = (namePlace, linkImg, likes, cardID, userID, {templateSelector, cardSelector, imgSelector, titleSelector, likeCounterSelector, btnDelSelector, btnLikeSelector, btnLikeActiveSelector, ...popupSelectors}) => {
-  const cardTemplate = document.querySelector(templateSelector).content;
-  const cardElement = cardTemplate.querySelector(cardSelector).cloneNode(true);
-  const galleryImg = cardElement.querySelector(imgSelector);
-  const galleryTitle = cardElement.querySelector(titleSelector);
-  const galleryLikeCounter = cardElement.querySelector(likeCounterSelector);
-  const deleteBtn = cardElement.querySelector(btnDelSelector);
-  const likeBtn = cardElement.querySelector(btnLikeSelector);
-  const isLike = likes.find(like => like._id === configApi.userID) === undefined ? false : true;
+const createCard = (namePlace, linkImg, likes, cardID, userID, myID) => {
+  const cardElement = cardTemplate.querySelector(selectorsCard.cardSelector).cloneNode(true);
+  const galleryImg = cardElement.querySelector(selectorsCard.imgSelector);
+  const galleryTitle = cardElement.querySelector(selectorsCard.titleSelector);
+  const galleryLikeCounter = cardElement.querySelector(selectorsCard.likeCounterSelector);
+  const deleteBtn = cardElement.querySelector(selectorsCard.btnDelSelector);
+  const likeBtn = cardElement.querySelector(selectorsCard.btnLikeSelector);
+  const isLike = likes.find(like => like._id === myID) === undefined ? false : true;
 
-  if (userID !== configApi.userID) {
+  if (userID !== myID) {
     deleteBtn.remove();
   }
 
   if (isLike) {
-    likeBtn.classList.add(btnLikeActiveSelector)
+    likeBtn.classList.add(selectorsCard.btnLikeActiveSelector)
   }
 
   galleryImg.src = linkImg;
@@ -57,21 +62,22 @@ const createCard = (namePlace, linkImg, likes, cardID, userID, {templateSelector
   galleryTitle.textContent = namePlace;
   galleryLikeCounter.textContent = likes.length ;
 
-  imagePopupOpeningHandler(galleryImg, popupSelectors);
+  imagePopupOpeningHandler(galleryImg);
 
   // Общий обработчик лайков
   likeBtn.addEventListener('click', () => {
-    if (!likeBtn.classList.contains(btnLikeActiveSelector)) {
-      handlerAddingLikes(cardID, likeBtn, btnLikeActiveSelector, galleryLikeCounter);
+    if (!likeBtn.classList.contains(selectorsCard.btnLikeActiveSelector)) {
+      handlerAddingLikes(cardID, likeBtn, selectorsCard.btnLikeActiveSelector, galleryLikeCounter);
     } else {
-      handlerDeleteLikes(cardID, likeBtn, btnLikeActiveSelector, galleryLikeCounter);
+      handlerDeleteLikes(cardID, likeBtn, selectorsCard.btnLikeActiveSelector, galleryLikeCounter);
     }
   })
 
   // Обработчик удаления карточки
   deleteBtn.addEventListener('click', () => {
-    delCard(cardID).catch(err => console.log(err));
-    cardElement.remove();
+    delCard(cardID)
+      .then( () => cardElement.remove())
+      .catch(err => console.log(err));
   })
 
   return cardElement;

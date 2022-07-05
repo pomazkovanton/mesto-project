@@ -2,8 +2,10 @@ import '../css/pages/index.css';
 import {enableValidation, disablingButton, handleClearForm} from './validate';
 import { createCard  } from './card';
 import { openPopup, closePopup, handleOverlayClick } from './popup';
-import { selectorsForm, selectorsCard } from './data';
+import { selectorsForm } from './data';
 import { getUser, getCards, postCards, updateUser, updateAvatar } from './api';
+
+let myID = '';
 
 // Переменные профиля пользователя
 const btnEdit = document.querySelector(".profile__btn-edit");
@@ -47,12 +49,6 @@ const renderLoading = (isLoading = false, typeBtnSubmit) => {
   isLoading ? button.textContent = 'Сохранение...' : button.textContent = 'Сохранить';
 }
 
-const delay = (ms) => {
-  return new Promise( res => {
-    setTimeout(res, ms);
-  })
-}
-
 //Функция открытия окна редактирования профиля
 const openPopupEdit = () => {
   handleClearForm(popupEdit, selectorsForm);
@@ -77,15 +73,15 @@ const openPopupAdd = () => {
 }
 
 //Функция добавления новой карточки
-const addCard = (namePlace, linkImg, likes, cardID, userID, selectorsCard) => {
-  const card = createCard(namePlace, linkImg, likes, cardID, userID, selectorsCard);
+const addCard = (namePlace, linkImg, likes, cardID, userID) => {
+  const card = createCard(namePlace, linkImg, likes, cardID, userID, myID);
   gallery.prepend(card);
 }
 
 //Функция отрисовки карточек
 const renderCards = (cards) => {
   cards.forEach(({name, link, likes, owner, _id}) => {
-    addCard(name, link, likes, _id, owner._id, selectorsCard)
+    addCard(name, link, likes, _id, owner._id)
   });
 }
 
@@ -98,13 +94,12 @@ const handleProfileFormSubmit = (evt) => {
     .then( ({name, about}) => {
       nameUser.textContent = name;
       positionUser.textContent = about;
+      closePopup(popupEdit);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally( () => renderLoading(false, 'edit'))
-
-  closePopup(popupEdit);
 }
 
 //Функция для обработки отправки формы добавления новой карточки
@@ -115,14 +110,13 @@ const handleCardFormSubmit = (evt) => {
 
   postCards(inputPlace.value, inputImg.value)
     .then( ({name, link, likes, _id, owner}) => {
-      addCard(name, link, likes, _id, owner._id, selectorsCard);
+      addCard(name, link, likes, _id, owner._id);
+      closePopup(popupAdd);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally( () => renderLoading(false, 'add'))
-
-   closePopup(popupAdd);
 }
 
 //Функция для обработки отправки формы изменения аватара пользователя
@@ -134,13 +128,12 @@ const handleAvatarFormSubmit = (evt) => {
   updateAvatar(inputAvatarSrc.value)
     .then( ({avatar}) => {
       avatarUser.src = avatar;
+      closePopup(popupEditAvatar);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally( () => renderLoading(false, 'avatar'))
-
-  closePopup(popupEditAvatar);
 }
 
 //Обработка событий для модального окна изменения аватара пользователя
@@ -169,20 +162,15 @@ closeButtons.forEach((button) => {
 // Включение валидации
 enableValidation(selectorsForm);
 
-//Получение данных о пользователе с сервера
-getUser()
-  .then(({name, about, avatar}) => {
+//Получение карточек и данных о пользователе с сервера
+Promise.all([getUser(), getCards()])
+  .then(([{name, about, avatar, _id}, cards]) => {
+    myID = _id;
     nameUser.textContent = name;
     positionUser.textContent = about;
     avatarUser.src = avatar;
+    renderCards(cards.reverse())
   })
-  .catch((err) => {
-    console.log(err);
-  });
-
-  //Получение карточек с сервера
-getCards()
-  .then( cards => renderCards(cards))
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch(error => {
+    console.error(error)
+  })
