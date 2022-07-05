@@ -1,9 +1,11 @@
-import { openPopup } from "./popup";
+import { openPopup, closePopup } from "./popup";
 import {delCard, putLike, delLike} from './api';
 import {selectorsCard} from './data';
 
 const cardTemplate = document.querySelector(selectorsCard.templateSelector).content;
 const popupView = document.querySelector(selectorsCard.popupSelector);
+const popupAlert = document.querySelector('.popup_type_alert');
+const btnAlert = popupAlert.querySelector('.popup__form-btn_type_alert');
 const popupViewImg = popupView.querySelector(selectorsCard.popupImgSelector);
 const popupViewCaption = popupView.querySelector(selectorsCard.popupCaptionSelector);
 
@@ -39,6 +41,18 @@ const handlerDeleteLikes = (card, like, activeClass, counter) => {
     .catch(err => console.log(err));
 }
 
+//Обработчик удаления карточки
+const handlerDeleteCard = (cardId) => {
+  const card = document.querySelector(`.gallery__item[data-id="${cardId}"]`);
+  delCard(cardId)
+    .then( () => {
+      card.remove();
+      closePopup(popupAlert);
+    })
+    .catch(err => console.log(err))
+    .finally( () => popupAlert.dataset.id = '');
+}
+
 //Функция создания новой карточки
 const createCard = (namePlace, linkImg, likes, cardID, userID, myID) => {
   const cardElement = cardTemplate.querySelector(selectorsCard.cardSelector).cloneNode(true);
@@ -60,7 +74,8 @@ const createCard = (namePlace, linkImg, likes, cardID, userID, myID) => {
   galleryImg.src = linkImg;
   galleryImg.alt = namePlace;
   galleryTitle.textContent = namePlace;
-  galleryLikeCounter.textContent = likes.length ;
+  galleryLikeCounter.textContent = likes.length;
+  cardElement.dataset.id = cardID;
 
   imagePopupOpeningHandler(galleryImg);
 
@@ -75,12 +90,16 @@ const createCard = (namePlace, linkImg, likes, cardID, userID, myID) => {
 
   // Обработчик удаления карточки
   deleteBtn.addEventListener('click', () => {
-    delCard(cardID)
-      .then( () => cardElement.remove())
-      .catch(err => console.log(err));
+    openPopup(popupAlert);
+    popupAlert.dataset.id = cardID;
   })
 
   return cardElement;
 }
+
+btnAlert.addEventListener('click', () => {
+  const id = popupAlert.dataset.id;
+  handlerDeleteCard(id);
+});
 
 export  {createCard }
