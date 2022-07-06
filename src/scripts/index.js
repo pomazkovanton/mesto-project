@@ -120,20 +120,19 @@ const handleCardFormSubmit = (evt) => {
 }
 
 //Функция для обработки отправки формы изменения аватара пользователя
-const handleAvatarFormSubmit = (evt) => {
+const handleAvatarFormSubmit = async (evt) => {
   evt.preventDefault();
 
   renderLoading(true, 'avatar');
 
-  updateAvatar(inputAvatarSrc.value)
-    .then( ({avatar}) => {
-      avatarUser.src = avatar;
-      closePopup(popupEditAvatar);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally( () => renderLoading(false, 'avatar'))
+  try {
+    const {avatar} = await updateAvatar(inputAvatarSrc.value);
+    avatarUser.src = avatar;
+    closePopup(popupEditAvatar);
+    renderLoading(false, 'avatar')
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Обработка событий для модального окна изменения аватара пользователя
@@ -163,14 +162,17 @@ closeButtons.forEach((button) => {
 enableValidation(selectorsForm);
 
 //Получение карточек и данных о пользователе с сервера
-Promise.all([getUser(), getCards()])
-  .then(([{name, about, avatar, _id}, cards]) => {
+const getData = async () => {
+  try {
+    const [{_id, name, about, avatar}, cards] = await Promise.all([getUser(), getCards()])
     myID = _id;
     nameUser.textContent = name;
     positionUser.textContent = about;
     avatarUser.src = avatar;
     renderCards(cards.reverse())
-  })
-  .catch(error => {
-    console.error(error)
-  })
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+getData();

@@ -22,35 +22,39 @@ const imagePopupOpeningHandler = (galleryImg) => {
 };
 
 //Обработчик добавления лайков
-const handlerAddingLikes = (card, like, activeClass, counter) => {
-  putLike(card)
-    .then(data => {
-      like.classList.add(activeClass);
-      counter.textContent = data.likes.length;
-    })
-    .catch(err => console.log(err));
+const handlerAddingLikes = async (card, like, activeClass, counter) => {
+  try {
+    const {likes} = await putLike(card);
+    like.classList.add(activeClass);
+    counter.textContent = likes.length;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Обработчик удаления лайков
-const handlerDeleteLikes = (card, like, activeClass, counter) => {
-  delLike(card)
-    .then(data => {
-      like.classList.remove(activeClass);
-      counter.textContent = data.likes.length;
-    })
-    .catch(err => console.log(err));
+const handlerDeleteLikes = async (card, like, activeClass, counter) => {
+  try {
+    const {likes} = await delLike(card);
+    like.classList.remove(activeClass);
+    counter.textContent = likes.length;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Обработчик удаления карточки
-const handlerDeleteCard = (cardId) => {
+const handlerDeleteCard = async (cardId) => {
   const card = document.querySelector(`.gallery__item[data-id="${cardId}"]`);
-  delCard(cardId)
-    .then( () => {
-      card.remove();
-      closePopup(popupAlert);
-    })
-    .catch(err => console.log(err))
-    .finally( () => popupAlert.dataset.id = '');
+
+  try {
+    await delCard(cardId);
+    card.remove();
+    closePopup(popupAlert);
+    popupAlert.dataset.id = '';
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Функция создания новой карточки
