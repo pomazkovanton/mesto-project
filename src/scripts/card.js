@@ -23,38 +23,25 @@ const imagePopupOpeningHandler = (galleryImg) => {
 
 //Обработчик добавления лайков
 const handlerAddingLikes = async (card, like, activeClass, counter) => {
-  try {
-    const {likes} = await putLike(card);
-    like.classList.add(activeClass);
-    counter.textContent = likes.length;
-  } catch (error) {
-    console.error(error);
-  }
+  const {data} = await putLike(card);
+  like.classList.add(activeClass);
+  counter.textContent = data.likes.length;
 }
 
 //Обработчик удаления лайков
 const handlerDeleteLikes = async (card, like, activeClass, counter) => {
-  try {
-    const {likes} = await delLike(card);
-    like.classList.remove(activeClass);
-    counter.textContent = likes.length;
-  } catch (error) {
-    console.error(error);
-  }
+  const {data} = await delLike(card);
+  like.classList.remove(activeClass);
+  counter.textContent = data.likes.length;
 }
 
 //Обработчик удаления карточки
 const handlerDeleteCard = async (cardId) => {
   const card = document.querySelector(`.gallery__item[data-id="${cardId}"]`);
-
-  try {
-    await delCard(cardId);
-    card.remove();
-    closePopup(popupAlert);
-    popupAlert.dataset.id = '';
-  } catch (error) {
-    console.error(error);
-  }
+  await delCard(cardId);
+  card.remove();
+  closePopup(popupAlert);
+  popupAlert.dataset.id = '';
 }
 
 //Функция создания новой карточки
