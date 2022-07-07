@@ -1,36 +1,13 @@
 import { configApi } from "./data";
 import axios from "axios";
 
-//Получение данных о пользователе с сервера
-const getUser = async () => {
+//Универсальный обработчик запроса на сервер
+const handleRequest = async (url, method, data={}, headers=configApi.headers) => {
   try {
-    const res = await axios(`${configApi.baseUrl}/users/me`,{headers: configApi.headers});
-    return res;
-  } catch (error) {
-    console.error(error.response.status+": "+error.response.data.message);
-  }
-}
-
-//Получение карточек с сервера
-const getCards = async () => {
-  try {
-    const res = await axios(`${configApi.baseUrl}/cards`, {headers: configApi.headers});
-    return res;
-  } catch (error) {
-    console.error(error.response.status+": "+error.response.data.message);
-  }
-}
-
-//Загрузка карточки на сервер
-const postCards = async (name, link) => {
-  try {
-    const res = await axios(`${configApi.baseUrl}/cards`, {
-      method: 'POST',
-      data: {
-        name: name,
-        link: link
-      },
-      headers: configApi.headers
+    const res = await axios(`${configApi.baseUrl}${url}`, {
+      method: method,
+      data: data,
+      headers: headers
     });
     return res;
   } catch (error) {
@@ -38,76 +15,44 @@ const postCards = async (name, link) => {
   }
 }
 
+//Получение данных о пользователе с сервера
+const getUser = () => {
+  return handleRequest('/users/me', 'GET');
+}
+
+//Получение карточек с сервера
+const getCards = () => {
+  return handleRequest('/cards', 'GET');
+}
+
+//Загрузка карточки на сервер
+const postCards = (name, link) => {
+  return handleRequest('/cards', 'POST', {name: name, link: link});
+}
+
 // Обновление данных о пользователе на сервере
-const updateUser = async (name, about) => {
-  try {
-    const res = await axios(`${configApi.baseUrl}/users/me`,{
-      method: 'PATCH',
-      data: {
-        name: name,
-        about: about
-      },
-      headers: configApi.headers
-    })
-    return res;
-  } catch (error) {
-    console.error(error.response.status+": "+error.response.data.message);
-  }
+const updateUser = (name, about) => {
+  return handleRequest('/users/me', 'PATCH', {name: name, about: about});
 }
 
 // Смена аватара на сервере
-const updateAvatar = async (avatar) => {
-  try {
-    const res = await axios(`${configApi.baseUrl}/users/me/avatar`,{
-      method: 'PATCH',
-      data: {
-        avatar: avatar
-      },
-      headers: configApi.headers
-    })
-    return res;
-  } catch (error) {
-    console.error(error.response.status+": "+error.response.data.message);
-  }
+const updateAvatar = (avatar) => {
+  return handleRequest('/users/me/avatar', 'PATCH', {avatar: avatar});
 }
 
 // Удаление карточки на сервере
-const delCard = async (cardID) => {
-  try {
-    const res = await axios(`${configApi.baseUrl}/cards/${cardID} `,{
-      method: 'DELETE',
-      headers: configApi.headers
-    })
-    return res;
-  } catch (error) {
-    console.error(error.response.status+": "+error.response.data.message);
-  }
+const delCard = (cardID) => {
+  return handleRequest(`/cards/${cardID}`, 'DELETE');
 }
 
 // Добавление лайка
-const putLike = async (cardID) => {
-  try {
-    const res = await axios(`${configApi.baseUrl}/cards/likes/${cardID}`,{
-      method: 'PUT',
-      headers: configApi.headers
-    })
-    return res;
-  } catch (error) {
-    console.error(error.response.status+": "+error.response.data.message);
-  }
+const putLike = (cardID) => {
+  return handleRequest(`/cards/likes/${cardID}`, 'PUT');
 }
 
 // Удаление лайка
-const delLike = async (cardID) => {
-  try {
-    const res = await axios(`${configApi.baseUrl}/cards/likes/${cardID}`,{
-      method: 'DELETE',
-      headers: configApi.headers
-    })
-    return res;
-  } catch (error) {
-    console.error(error.response.status+": "+error.response.data.message);
-  }
+const delLike = (cardID) => {
+  return handleRequest(`/cards/likes/${cardID}`, 'DELETE');
 }
 
 export {getCards, getUser, postCards, updateUser, delCard, putLike, delLike, updateAvatar}
