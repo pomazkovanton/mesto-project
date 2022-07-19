@@ -1,4 +1,4 @@
-import { configApi } from "./data";
+import { configApi } from "../utils/constants";
 import axios from "axios";
 
 //Универсальный обработчик запроса на сервер

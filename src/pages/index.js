@@ -1,48 +1,11 @@
 import '../css/pages/index.css';
-import {enableValidation, disablingButton, handleClearForm} from './validate';
-import { createCard  } from './card';
-import { openPopup, closePopup, handleOverlayClick } from './popup';
-import { selectorsForm } from './data';
-import { getUser, getCards, postCards, updateUser, updateAvatar } from './api';
+import {enableValidation, disablingButton, handleClearForm} from '../components/validate';
+import { createCard  } from '../components/card';
+import { openPopup, closePopup, handleOverlayClick } from '../components/popup';
+import { getUser, getCards, postCards, updateUser, updateAvatar } from '../components/api';
+import {selectorsForm, btnEdit, btnEditAvatar, nameUser, positionUser, avatarUser, popupEditAvatar, formEditAvatar, btnSubmitEditAvatar, inputAvatarSrc, popupEdit, formEdit, btnSubmitEdit, inputName, inputPosition, btnAdd, popupAdd, formAdd, btnSubmitAdd, inputPlace, inputImg, gallery, closeButtons, popups} from '../utils/constants';
 
 let myID = '';
-
-// Переменные профиля пользователя
-const btnEdit = document.querySelector(".profile__btn-edit");
-const btnEditAvatar = document.querySelector(".profile__edit-avatar");
-const nameUser = document.querySelector(".profile__name");
-const positionUser = document.querySelector(".profile__position");
-const avatarUser = document.querySelector(".profile__avatar");
-
-// Переменные модального окна изменения аватара пользователя
-const popupEditAvatar = document.querySelector(".popup_type_avatar");
-const formEditAvatar = popupEditAvatar.querySelector(".popup__form");
-const btnSubmitEditAvatar = formEditAvatar.querySelector(selectorsForm.submitButtonSelector);
-const inputAvatarSrc = formEditAvatar.querySelector(".popup__form-input_type_avatar");
-
-// Переменные модального окна изменения профиля
-const popupEdit = document.querySelector(".popup_type_edit");
-const formEdit = popupEdit.querySelector(".popup__form");
-const btnSubmitEdit = formEdit.querySelector(selectorsForm.submitButtonSelector);
-const inputName = popupEdit.querySelector(".popup__form-input_type_name");
-const inputPosition = popupEdit.querySelector(".popup__form-input_type_position");
-
-// Кнопка открытия модального окна добавления новой карточки
-const btnAdd = document.querySelector(".profile__btn-add");
-
-// Переменные модального окна добавления новой карточки
-const popupAdd = document.querySelector(".popup_type_add");
-const formAdd = popupAdd.querySelector(".popup__form");
-const btnSubmitAdd = formAdd.querySelector(selectorsForm.submitButtonSelector);
-const inputPlace = popupAdd.querySelector(".popup__form-input_type_place");
-const inputImg = popupAdd.querySelector(".popup__form-input_type_img");
-
-// Переменные галереи
-const gallery = document.querySelector('.gallery__list');
-
-// Переменные модальных окон
-const closeButtons = document.querySelectorAll(".popup__btn-close");
-const popups = document.querySelectorAll(".popup");
 
 const renderLoading = (isLoading = false, typeBtnSubmit) => {
   const button = document.querySelector(`.popup__form-btn_type_${typeBtnSubmit}`);

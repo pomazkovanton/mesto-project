@@ -1,13 +1,6 @@
 import { openPopup, closePopup } from "./popup";
 import {delCard, putLike, delLike} from './api';
-import {selectorsCard} from './data';
-
-const cardTemplate = document.querySelector(selectorsCard.templateSelector).content;
-const popupView = document.querySelector(selectorsCard.popupSelector);
-const popupAlert = document.querySelector('.popup_type_alert');
-const btnAlert = popupAlert.querySelector('.popup__form-btn_type_alert');
-const popupViewImg = popupView.querySelector(selectorsCard.popupImgSelector);
-const popupViewCaption = popupView.querySelector(selectorsCard.popupCaptionSelector);
+import {selectorsCard, cardTemplate, popupView, popupAlert, btnAlert, popupViewImg, popupViewCaption} from '../utils/constants';
 
 // Обработка открытия модального окна с изображением
 const imagePopupOpeningHandler = (galleryImg) => {
