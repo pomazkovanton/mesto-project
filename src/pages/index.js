@@ -2,8 +2,10 @@ import '../css/pages/index.css';
 import {enableValidation, disablingButton, handleClearForm} from '../components/validate';
 import { createCard  } from '../components/card';
 import { openPopup, closePopup, handleOverlayClick } from '../components/popup';
-import { getUser, getCards, postCards, updateUser, updateAvatar } from '../components/api';
-import {selectorsForm, btnEdit, btnEditAvatar, nameUser, positionUser, avatarUser, popupEditAvatar, formEditAvatar, btnSubmitEditAvatar, inputAvatarSrc, popupEdit, formEdit, btnSubmitEdit, inputName, inputPosition, btnAdd, popupAdd, formAdd, btnSubmitAdd, inputPlace, inputImg, gallery, closeButtons, popups} from '../utils/constants';
+import Api from '../components/Api';
+import {selectorsForm, configApi, btnEdit, btnEditAvatar, nameUser, positionUser, avatarUser, popupEditAvatar, formEditAvatar, btnSubmitEditAvatar, inputAvatarSrc, popupEdit, formEdit, btnSubmitEdit, inputName, inputPosition, btnAdd, popupAdd, formAdd, btnSubmitAdd, inputPlace, inputImg, gallery, closeButtons, popups} from '../utils/constants';
+
+const api = new Api(configApi);
 
 let myID = '';
 
@@ -53,7 +55,7 @@ const handleProfileFormSubmit = async (evt) => {
   evt.preventDefault();
   renderLoading(true, 'edit');
 
-  const user = await updateUser(inputName.value, inputPosition.value);
+  const user = await api.updateUser(inputName.value, inputPosition.value);
   const {name, about} = user.data;
   nameUser.textContent = name;
   positionUser.textContent = about;
@@ -67,7 +69,7 @@ const handleCardFormSubmit = async (evt) => {
   evt.preventDefault();
 
   renderLoading(true, 'add');
-  const card = await postCards(inputPlace.value, inputImg.value);
+  const card = await api.postCards(inputPlace.value, inputImg.value);
   const {name, link, likes, _id, owner} = card.data;
 
   addCard(name, link, likes, _id, owner._id);
@@ -81,7 +83,7 @@ const handleAvatarFormSubmit = async (evt) => {
   evt.preventDefault();
 
   renderLoading(true, 'avatar');
-  const {data} = await updateAvatar(inputAvatarSrc.value);
+  const {data} = await api.updateAvatar(inputAvatarSrc.value);
   avatarUser.src = data.avatar;
   closePopup(popupEditAvatar);
   renderLoading(false, 'avatar')
@@ -115,7 +117,7 @@ enableValidation(selectorsForm);
 
 //Получение карточек и данных о пользователе с сервера
 const getData = async () => {
-  const serverData = await Promise.all([getUser(), getCards()]);
+  const serverData = await Promise.all([api.getUser(), api.getCards()]);
   const {_id, name, about, avatar} = serverData[0].data;
   const cards = serverData[1].data;
 

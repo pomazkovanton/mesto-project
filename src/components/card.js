@@ -1,6 +1,8 @@
 import { openPopup, closePopup } from "./popup";
-import {delCard, putLike, delLike} from './api';
-import {selectorsCard, cardTemplate, popupView, popupAlert, btnAlert, popupViewImg, popupViewCaption} from '../utils/constants';
+import Api from './Api';
+import {selectorsCard, configApi, cardTemplate, popupView, popupAlert, btnAlert, popupViewImg, popupViewCaption} from '../utils/constants';
+
+const api = new Api(configApi);
 
 // Обработка открытия модального окна с изображением
 const imagePopupOpeningHandler = (galleryImg) => {
@@ -16,14 +18,14 @@ const imagePopupOpeningHandler = (galleryImg) => {
 
 //Обработчик добавления лайков
 const handlerAddingLikes = async (card, like, activeClass, counter) => {
-  const {data} = await putLike(card);
+  const {data} = await api.putLike(card);
   like.classList.add(activeClass);
   counter.textContent = data.likes.length;
 }
 
 //Обработчик удаления лайков
 const handlerDeleteLikes = async (card, like, activeClass, counter) => {
-  const {data} = await delLike(card);
+  const {data} = await api.delLike(card);
   like.classList.remove(activeClass);
   counter.textContent = data.likes.length;
 }
@@ -31,7 +33,7 @@ const handlerDeleteLikes = async (card, like, activeClass, counter) => {
 //Обработчик удаления карточки
 const handlerDeleteCard = async (cardId) => {
   const card = document.querySelector(`.gallery__item[data-id="${cardId}"]`);
-  await delCard(cardId);
+  await api.delCard(cardId);
   card.remove();
   closePopup(popupAlert);
   popupAlert.dataset.id = '';
