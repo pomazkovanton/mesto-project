@@ -1,4 +1,4 @@
-import { openPopup, closePopup } from "./popup";
+import { openPopup, closePopup } from "./popups";
 import Api from './Api';
 import {selectorsCard, configApi, cardTemplate, popupView, popupAlert, btnAlert, popupViewImg, popupViewCaption} from '../utils/constants';
 

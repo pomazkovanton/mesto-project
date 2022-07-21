@@ -1,7 +1,7 @@
 import '../css/pages/index.css';
 import {enableValidation, disablingButton, handleClearForm} from '../components/validate';
 import { createCard  } from '../components/card';
-import { openPopup, closePopup, handleOverlayClick } from '../components/popup';
+import { openPopup, closePopup, handleOverlayClick } from '../components/popups';
 import Api from '../components/Api';
 import {selectorsForm, configApi, btnEdit, btnEditAvatar, nameUser, positionUser, avatarUser, popupEditAvatar, formEditAvatar, btnSubmitEditAvatar, inputAvatarSrc, popupEdit, formEdit, btnSubmitEdit, inputName, inputPosition, btnAdd, popupAdd, formAdd, btnSubmitAdd, inputPlace, inputImg, gallery, closeButtons, popups} from '../utils/constants';
 
