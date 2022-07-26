@@ -5,3 +5,9 @@ export const configApi = {
     "Content-Type": "application/json",
   },
 };
+
+export const selectorsUserInfo = {
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__position',
+  avatarSelector: '.profile__avatar'
+}
