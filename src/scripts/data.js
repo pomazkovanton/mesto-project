@@ -1,12 +1,12 @@
 const selectorsForm = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-input',
-  submitButtonSelector: '.popup__form-btn',
-  inactiveButtonSelector: 'popup__form-btn_inactive',
-  inputErrorSelector: 'popup__form-input_type_error',
-  errorActiveSelector: 'popup__form-error_active',
-  errorSelector: '.popup__form-error'
-}
+  formSelector: ".popup__form",
+  inputSelector: ".popup__form-input",
+  submitButtonSelector: ".popup__form-btn",
+  inactiveButtonSelector: "popup__form-btn_inactive",
+  inputErrorSelector: "popup__form-input_type_error",
+  errorActiveSelector: "popup__form-error_active",
+  errorSelector: ".popup__form-error",
+};
 
 const selectorsCard = {
   templateSelector: "#card-template",
@@ -20,14 +20,6 @@ const selectorsCard = {
   btnLikeActiveSelector: "gallery__btn-like_active",
   btnDelSelector: ".gallery__btn-del",
   likeCounterSelector: ".gallery__like-counter",
-}
+};
 
-const configApi = {
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
-  headers: {
-    authorization: '625c1c0f-02ec-4f48-b7e0-8363adbe96f2',
-    'Content-Type': 'application/json'
-  }
-}
-
-export { selectorsForm, selectorsCard, configApi}
+export { selectorsForm, selectorsCard, configApi };
