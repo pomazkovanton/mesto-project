@@ -7,7 +7,18 @@ export const configApi = {
 };
 
 export const selectorsUserInfo = {
-  nameSelector: '.profile__name',
-  aboutSelector: '.profile__position',
-  avatarSelector: '.profile__avatar'
-}
+  nameSelector: ".profile__name",
+  aboutSelector: ".profile__position",
+  avatarSelector: ".profile__avatar",
+};
+
+export const selectorsCard = {
+  templateSelector: "#card-template",
+  cardSelector: ".gallery__item",
+  imgSelector: ".gallery__img",
+  titleSelector: ".gallery__item-title",
+  btnLikeSelector: ".gallery__btn-like",
+  btnLikeActiveSelector: "gallery__btn-like_active",
+  btnDelSelector: ".gallery__btn-del",
+  likeCounterSelector: ".gallery__like-counter",
+};

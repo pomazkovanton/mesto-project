@@ -3,20 +3,26 @@ import "../../css/pages/index.css";
 import Api from "../components/Api";
 import UserInfo from "../components/UserInfo";
 import Section from "../components/Section";
+import Card from "../components/Card";
 
-import { configApi, selectorsUserInfo } from "../utils/constants";
+import {
+  configApi,
+  selectorsUserInfo,
+  selectorsCard,
+} from "../utils/constants";
 
 // Создания экземпляра карточки и рендер новой карточки
 const renderCard = (cardData) => {
-  //создание и рендер карточки
-}
+  const card = new Card(cardData, user._id, selectorsCard);
+  return card.generate();
+};
 
 // Создания экземпляра api
 const api = new Api(configApi);
 // Создания экземпляра пользователя
 const user = new UserInfo(selectorsUserInfo);
 // Создания экземпляра Section для рендера карточек
-const gallery = new Section('.gallery__list', renderCard);
+const gallery = new Section(".gallery__list", renderCard);
 
 const getData = async () => {
   const serverData = await Promise.all([api.getUser(), api.getCards()]);
