@@ -4,11 +4,13 @@ import Api from "../components/Api";
 import UserInfo from "../components/UserInfo";
 import Section from "../components/Section";
 import Card from "../components/Card";
+import PopupWithImage from '../components/PopupWithImage';
 
 import {
   configApi,
   selectorsUserInfo,
   selectorsCard,
+  selectorsPopupView,
 } from "../utils/constants";
 
 // Создания экземпляра карточки и рендер новой карточки
@@ -23,6 +25,11 @@ const api = new Api(configApi);
 const user = new UserInfo(selectorsUserInfo);
 // Создания экземпляра Section для рендера карточек
 const gallery = new Section(".gallery__list", renderCard);
+// Создания экземпляров модальных окон
+const popupView = new PopupWithImage(selectorsPopupView);
+
+//Добавление слушателей событий на модальные окна
+popupView.setEventListeners();
 
 const getData = async () => {
   const serverData = await Promise.all([api.getUser(), api.getCards()]);
@@ -49,7 +56,7 @@ const handleLikeCard = async (card) => {
 
 // Обработчик клика по изображению карточки (открытие popup с изображением)
 const handleImageClick = (name, url) => {
-  //Открытие  popup с изображением
+  popupView.open(name, url)
 }
 
 // Обработчик нажатия по кнопке удаления карточки (открытие popup с предупреждением)

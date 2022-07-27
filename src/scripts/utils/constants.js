@@ -22,3 +22,9 @@ export const selectorsCard = {
   btnDelSelector: ".gallery__btn-del",
   likeCounterSelector: ".gallery__like-counter",
 };
+
+export const selectorsPopupView = {
+  popupSelector: '.popup_type_view',
+  imageSelector: '.popup__figure-img',
+  captionSelector: '.popup__figure-caption'
+}
