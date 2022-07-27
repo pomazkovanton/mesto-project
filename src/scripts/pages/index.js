@@ -6,6 +6,7 @@ import Section from "../components/Section";
 import Card from "../components/Card";
 import PopupWithImage from "../components/PopupWithImage";
 import PopupWithAlert from "../components/PopupWithAlert";
+import PopupWithForm from "../components/PopupWithForm";
 import FormValidator from "../components/FormValidator";
 
 import {
@@ -19,9 +20,7 @@ import {
   forms,
   elementsPopupEdit,
 } from "../utils/constants";
-
 import { renderLoading, handleOpenPopup } from "../utils/utils";
-import PopupWithForm from "../components/PopupWithForm";
 
 //Обработчик добавления новой карточки
 const handleAddCard = async (inputValues) => {
@@ -79,22 +78,13 @@ const gallery = new Section(".gallery__list", renderCard);
 // Создания экземпляров модальных окон
 const popupView = new PopupWithImage(selectorsPopupView);
 const popupAlert = new PopupWithAlert(popupSelectors.alert, handleClosingAlert);
-const popupAddAvatar = new PopupWithForm(
-  popupSelectors.editAvatar,
-  handleAddAvatar
-);
-const popupEditUser = new PopupWithForm(
-  popupSelectors.editProfile,
-  handleEditUser
-);
+const popupAddAvatar = new PopupWithForm(popupSelectors.editAvatar, handleAddAvatar);
+const popupEditUser = new PopupWithForm(popupSelectors.editProfile, handleEditUser);
 const popupAddCard = new PopupWithForm(popupSelectors.addCard, handleAddCard);
 
 //Создание экземпляров форм для валидации
 const formValidAvatar = new FormValidator(selectorsForm, forms.formEditAvatar);
-const formValidProfile = new FormValidator(
-  selectorsForm,
-  forms.formEditProfile
-);
+const formValidProfile = new FormValidator(selectorsForm, forms.formEditProfile);
 const formValidCard = new FormValidator(selectorsForm, forms.formAddCard);
 
 //Запуск валидации форм
@@ -152,14 +142,8 @@ const handleOpenPopupEditUser = () => {
 };
 
 //Обработчик кликов кнопок
-buttons.btnEditAvatar.addEventListener("click", () =>
-  handleOpenPopup(popupAddAvatar, formValidAvatar)
-);
-
+buttons.btnEditAvatar.addEventListener("click", () => handleOpenPopup(popupAddAvatar, formValidAvatar));
 buttons.btnEditUser.addEventListener("click", handleOpenPopupEditUser);
-
-buttons.btnAddCard.addEventListener("click", () =>
-  handleOpenPopup(popupAddCard, formValidCard)
-);
+buttons.btnAddCard.addEventListener("click", () => handleOpenPopup(popupAddCard, formValidCard));
 
 getData();
