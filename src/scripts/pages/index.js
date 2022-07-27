@@ -4,27 +4,50 @@ import Api from "../components/Api";
 import UserInfo from "../components/UserInfo";
 import Section from "../components/Section";
 import Card from "../components/Card";
-import PopupWithImage from '../components/PopupWithImage';
-import PopupWithAlert from '../components/PopupWithAlert';
+import PopupWithImage from "../components/PopupWithImage";
+import PopupWithAlert from "../components/PopupWithAlert";
+import FormValidator from "../components/FormValidator";
 
 import {
   configApi,
   selectorsUserInfo,
   selectorsCard,
   selectorsPopupView,
-  popupSelectors
+  popupSelectors,
+  buttons,
+  selectorsForm,
+  forms,
 } from "../utils/constants";
+
+import { renderLoading, handleOpenPopup } from "../utils/utils";
+import PopupWithForm from "../components/PopupWithForm";
+
+//Обработчик изменения аватара
+const handleAddAvatar = async ({ avatar }) => {
+  renderLoading(true, "avatar");
+  const { data } = await api.updateAvatar(avatar);
+  user.setUserAvatar(data);
+  popupAddAvatar.close();
+  renderLoading(false, "avatar");
+};
 
 //Обработчик удаления карточки
 const handleClosingAlert = async (cardID) => {
   await api.delCard(cardID);
   popupAlert.card.deleteCard();
   popupAlert.close();
-}
+};
 
 // Создания экземпляра карточки и рендер новой карточки
 const renderCard = (cardData) => {
-  const card = new Card(cardData, user._id, selectorsCard, handleLikeCard, handleImageClick, handleDeleteCard);
+  const card = new Card(
+    cardData,
+    user._id,
+    selectorsCard,
+    handleLikeCard,
+    handleImageClick,
+    handleDeleteCard
+  );
   return card.generate();
 };
 
@@ -37,10 +60,21 @@ const gallery = new Section(".gallery__list", renderCard);
 // Создания экземпляров модальных окон
 const popupView = new PopupWithImage(selectorsPopupView);
 const popupAlert = new PopupWithAlert(popupSelectors.alert, handleClosingAlert);
+const popupAddAvatar = new PopupWithForm(
+  popupSelectors.editAvatar,
+  handleAddAvatar
+);
+
+//Создание экземпляров форм для валидации
+const formValidAvatar = new FormValidator(selectorsForm, forms.formEditAvatar);
+
+//Запуск валидации форм
+formValidAvatar.enableValidation();
 
 //Добавление слушателей событий на модальные окна
 popupView.setEventListeners();
 popupAlert.setEventListeners();
+popupAddAvatar.setEventListeners();
 
 const getData = async () => {
   const serverData = await Promise.all([api.getUser(), api.getCards()]);
@@ -58,22 +92,27 @@ const getData = async () => {
 
 // Обработчик лайков
 const handleLikeCard = async (card) => {
-  const {data} = card.checkLike()
+  const { data } = card.checkLike()
     ? await api.delLike(card._id)
-    : await api.putLike(card._id)
+    : await api.putLike(card._id);
   card.likes = data.likes;
   card.renderLike();
-}
+};
 
 // Обработчик клика по изображению карточки (открытие popup с изображением)
 const handleImageClick = (name, url) => {
-  popupView.open(name, url)
-}
+  popupView.open(name, url);
+};
 
 // Обработчик нажатия по кнопке удаления карточки (открытие popup с предупреждением)
 const handleDeleteCard = (card) => {
   popupAlert.open();
   popupAlert.getIdCard(card);
-}
+};
+
+//Обработчик кликов кнопок
+buttons.btnEditAvatar.addEventListener("click", () =>
+  handleOpenPopup(popupAddAvatar, formValidAvatar)
+);
 
 getData();
