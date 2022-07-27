@@ -13,7 +13,7 @@ import {
 
 // Создания экземпляра карточки и рендер новой карточки
 const renderCard = (cardData) => {
-  const card = new Card(cardData, user._id, selectorsCard, handleLikeCard);
+  const card = new Card(cardData, user._id, selectorsCard, handleLikeCard, handleImageClick);
   return card.generate();
 };
 
@@ -45,6 +45,11 @@ const handleLikeCard = async (card) => {
     : await api.putLike(card._id)
   card.likes = data.likes;
   card.renderLike();
+}
+
+// Обработчик клика по изображению карточки (открытие popup с изображением)
+const handleImageClick = (name, url) => {
+  //Открытие  popup с изображением
 }
 
 getData();

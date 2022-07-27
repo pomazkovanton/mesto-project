@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ _id, name, link, likes, owner }, userID, selectors, handleLikeCard) {
+  constructor({ _id, name, link, likes, owner }, userID, selectors, handleLikeCard, handleImageClick) {
     this.likes = likes;
 
     this._id = _id;
@@ -9,7 +9,7 @@ export default class Card {
     this._userID = userID;
     this._selectors = selectors;
     this._handleLikeCard = handleLikeCard;
-    //this._handleImageClick = handleImageClick;
+    this._handleImageClick = handleImageClick;
     //this._handleDeleteCard = handleDeleteCard;
   }
 
@@ -69,9 +69,14 @@ export default class Card {
 
   _setEventListeners() {
     this._element
-    .querySelector(this._selectors.btnLikeSelector)
-    .addEventListener('click', () => {
-      this._handleLikeCard(this);
-    });
+      .querySelector(this._selectors.btnLikeSelector)
+      .addEventListener('click', () => {
+        this._handleLikeCard(this);
+      });
+    this._element
+      .querySelector(this._selectors.imgSelector)
+      .addEventListener('click', () => {
+        this._handleImageClick(this._name, this._link);
+      });
   }
 }
