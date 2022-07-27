@@ -5,13 +5,22 @@ import UserInfo from "../components/UserInfo";
 import Section from "../components/Section";
 import Card from "../components/Card";
 import PopupWithImage from '../components/PopupWithImage';
+import PopupWithAlert from '../components/PopupWithAlert';
 
 import {
   configApi,
   selectorsUserInfo,
   selectorsCard,
   selectorsPopupView,
+  popupSelectors
 } from "../utils/constants";
+
+//Обработчик удаления карточки
+const handleClosingAlert = async (cardID) => {
+  await api.delCard(cardID);
+  popupAlert.card.deleteCard();
+  popupAlert.close();
+}
 
 // Создания экземпляра карточки и рендер новой карточки
 const renderCard = (cardData) => {
@@ -27,9 +36,11 @@ const user = new UserInfo(selectorsUserInfo);
 const gallery = new Section(".gallery__list", renderCard);
 // Создания экземпляров модальных окон
 const popupView = new PopupWithImage(selectorsPopupView);
+const popupAlert = new PopupWithAlert(popupSelectors.alert, handleClosingAlert);
 
 //Добавление слушателей событий на модальные окна
 popupView.setEventListeners();
+popupAlert.setEventListeners();
 
 const getData = async () => {
   const serverData = await Promise.all([api.getUser(), api.getCards()]);
@@ -61,7 +72,8 @@ const handleImageClick = (name, url) => {
 
 // Обработчик нажатия по кнопке удаления карточки (открытие popup с предупреждением)
 const handleDeleteCard = (card) => {
-  // Открытие popup с предупреждением
+  popupAlert.open();
+  popupAlert.getIdCard(card);
 }
 
 getData();

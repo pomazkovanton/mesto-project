@@ -26,5 +26,12 @@ export const selectorsCard = {
 export const selectorsPopupView = {
   popupSelector: '.popup_type_view',
   imageSelector: '.popup__figure-img',
-  captionSelector: '.popup__figure-caption'
+  captionSelector: '.popup__figure-caption',
+}
+
+export const popupSelectors = {
+  editAvatar: ".popup_type_avatar",
+  editProfile: ".popup_type_edit",
+  addCard: ".popup_type_add",
+  alert: ".popup_type_alert",
 }

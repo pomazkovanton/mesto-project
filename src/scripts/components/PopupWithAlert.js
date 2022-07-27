@@ -1,10 +1,10 @@
 import Popup from "./Popup";
 
 export default class PopupWithAlert extends Popup {
-  constructor(popupSelector, handleClosingAlert, submitButton){
+  constructor(popupSelector, handleClosingAlert){
     super(popupSelector);
     this._handleClosingAlert = handleClosingAlert;
-    this._button = this._popup.querySelector(submitButton);
+    this._button = this._popup.querySelector('.popup__form-btn_type_alert');
   }
 
   getIdCard(card) {
