@@ -23,6 +23,15 @@ import {
 import { renderLoading, handleOpenPopup } from "../utils/utils";
 import PopupWithForm from "../components/PopupWithForm";
 
+//Обработчик добавления новой карточки
+const handleAddCard = async (inputValues) => {
+  renderLoading(true, "add");
+  const { data } = await api.postCards(inputValues);
+  gallery.addItem(renderCard(data));
+  popupAddCard.close();
+  renderLoading(false, "add");
+};
+
 //Обработчик изменения информации о пользователе
 const handleEditUser = async (inputValues) => {
   renderLoading(true, "edit");
@@ -78,6 +87,7 @@ const popupEditUser = new PopupWithForm(
   popupSelectors.editProfile,
   handleEditUser
 );
+const popupAddCard = new PopupWithForm(popupSelectors.addCard, handleAddCard);
 
 //Создание экземпляров форм для валидации
 const formValidAvatar = new FormValidator(selectorsForm, forms.formEditAvatar);
@@ -85,16 +95,19 @@ const formValidProfile = new FormValidator(
   selectorsForm,
   forms.formEditProfile
 );
+const formValidCard = new FormValidator(selectorsForm, forms.formAddCard);
 
 //Запуск валидации форм
 formValidAvatar.enableValidation();
 formValidProfile.enableValidation();
+formValidCard.enableValidation();
 
 //Добавление слушателей событий на модальные окна
 popupView.setEventListeners();
 popupAlert.setEventListeners();
 popupAddAvatar.setEventListeners();
 popupEditUser.setEventListeners();
+popupAddCard.setEventListeners();
 
 const getData = async () => {
   const serverData = await Promise.all([api.getUser(), api.getCards()]);
@@ -144,5 +157,9 @@ buttons.btnEditAvatar.addEventListener("click", () =>
 );
 
 buttons.btnEditUser.addEventListener("click", handleOpenPopupEditUser);
+
+buttons.btnAddCard.addEventListener("click", () =>
+  handleOpenPopup(popupAddCard, formValidCard)
+);
 
 getData();
