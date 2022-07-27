@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ _id, name, link, likes, owner }, userID, selectors, handleLikeCard, handleImageClick) {
+  constructor({ _id, name, link, likes, owner }, userID, selectors, handleLikeCard, handleImageClick, handleDeleteCard) {
     this.likes = likes;
 
     this._id = _id;
@@ -10,7 +10,7 @@ export default class Card {
     this._selectors = selectors;
     this._handleLikeCard = handleLikeCard;
     this._handleImageClick = handleImageClick;
-    //this._handleDeleteCard = handleDeleteCard;
+    this._handleDeleteCard = handleDeleteCard;
   }
 
   checkLike() {
@@ -25,6 +25,11 @@ export default class Card {
       this._cardLikeBtn.classList.remove('gallery__btn-like_active');
       this._cardLikeCounter.textContent = this.likes.length;
     }
+  }
+
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
   }
 
   generate() {
@@ -77,6 +82,11 @@ export default class Card {
       .querySelector(this._selectors.imgSelector)
       .addEventListener('click', () => {
         this._handleImageClick(this._name, this._link);
+      });
+    this._element
+      .querySelector(this._selectors.btnDelSelector)
+      .addEventListener('click', () => {
+        this._handleDeleteCard(this);
       });
   }
 }
