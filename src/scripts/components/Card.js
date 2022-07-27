@@ -13,13 +13,18 @@ export default class Card {
     //this._handleDeleteCard = handleDeleteCard;
   }
 
-  _getElement() {
-    const cardElement = document
-      .querySelector(this._selectors.templateSelector)
-      .content.querySelector(this._selectors.cardSelector)
-      .cloneNode(true);
+  checkLike() {
+    return this.likes.some(like => like._id === this._userID);
+  }
 
-    return cardElement;
+  renderLike() {
+    if (this.checkLike()) {
+      this._cardLikeBtn.classList.add('gallery__btn-like_active');
+      this._cardLikeCounter.textContent = this.likes.length;
+    } else {
+      this._cardLikeBtn.classList.remove('gallery__btn-like_active');
+      this._cardLikeCounter.textContent = this.likes.length;
+    }
   }
 
   generate() {
@@ -42,7 +47,8 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardTitle.textContent = this._name;
-    this._cardLikeCounter.textContent = this.likes.length; //Заменить
+
+    this.renderLike();
 
     if (this._owner._id !== this._userID) {
       this._cardDeleteBtn.remove();
@@ -52,4 +58,13 @@ export default class Card {
   }
 
   _setEventListeners() {}
+
+  _getElement() {
+    const cardElement = document
+      .querySelector(this._selectors.templateSelector)
+      .content.querySelector(this._selectors.cardSelector)
+      .cloneNode(true);
+
+    return cardElement;
+  }
 }
