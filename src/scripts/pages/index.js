@@ -17,10 +17,20 @@ import {
   buttons,
   selectorsForm,
   forms,
+  elementsPopupEdit,
 } from "../utils/constants";
 
 import { renderLoading, handleOpenPopup } from "../utils/utils";
 import PopupWithForm from "../components/PopupWithForm";
+
+//Обработчик изменения информации о пользователе
+const handleEditUser = async (inputValues) => {
+  renderLoading(true, "edit");
+  const { data } = await api.updateUser(inputValues);
+  user.setUserInfo(data);
+  popupEditUser.close();
+  renderLoading(false, "edit");
+};
 
 //Обработчик изменения аватара
 const handleAddAvatar = async ({ avatar }) => {
@@ -64,17 +74,27 @@ const popupAddAvatar = new PopupWithForm(
   popupSelectors.editAvatar,
   handleAddAvatar
 );
+const popupEditUser = new PopupWithForm(
+  popupSelectors.editProfile,
+  handleEditUser
+);
 
 //Создание экземпляров форм для валидации
 const formValidAvatar = new FormValidator(selectorsForm, forms.formEditAvatar);
+const formValidProfile = new FormValidator(
+  selectorsForm,
+  forms.formEditProfile
+);
 
 //Запуск валидации форм
 formValidAvatar.enableValidation();
+formValidProfile.enableValidation();
 
 //Добавление слушателей событий на модальные окна
 popupView.setEventListeners();
 popupAlert.setEventListeners();
 popupAddAvatar.setEventListeners();
+popupEditUser.setEventListeners();
 
 const getData = async () => {
   const serverData = await Promise.all([api.getUser(), api.getCards()]);
@@ -110,9 +130,19 @@ const handleDeleteCard = (card) => {
   popupAlert.getIdCard(card);
 };
 
+//Обработчик открытия модального окна изменения профиля
+const handleOpenPopupEditUser = () => {
+  const { name, about } = user.getUserInfo();
+  elementsPopupEdit.nameInput.value = name;
+  elementsPopupEdit.aboutInput.value = about;
+  handleOpenPopup(popupEditUser, formValidProfile);
+};
+
 //Обработчик кликов кнопок
 buttons.btnEditAvatar.addEventListener("click", () =>
   handleOpenPopup(popupAddAvatar, formValidAvatar)
 );
+
+buttons.btnEditUser.addEventListener("click", handleOpenPopupEditUser);
 
 getData();

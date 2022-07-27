@@ -63,3 +63,8 @@ export const forms = {
   formEditProfile: popup.popupEditProfile.querySelector(".popup__form"),
   formAddCard: popup.popupAddCard.querySelector(".popup__form"),
 };
+
+export const elementsPopupEdit = {
+  nameInput: document.querySelector(".popup__form-input_type_name"),
+  aboutInput: document.querySelector(".popup__form-input_type_position"),
+};
