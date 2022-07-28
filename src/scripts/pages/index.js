@@ -20,11 +20,11 @@ import {
   forms,
   elementsPopupEdit,
 } from "../utils/constants";
-import { renderLoading, handleOpenPopup } from "../utils/utils";
+import { handleOpenPopup } from "../utils/utils";
 
 //Обработчик добавления новой карточки
 const handleAddCard = async (inputValues) => {
-  renderLoading(true, "add");
+  popupAddCard.renderLoading(true, 'Создать', 'Создание..');
   try {
     const { data } = await api.postCards(inputValues);
     gallery.addItem(renderCard(data));
@@ -35,13 +35,13 @@ const handleAddCard = async (inputValues) => {
     console.error(error.response.status + ": " + error.response.data.message);
   }
   finally {
-    renderLoading(false, "add");
+    popupAddCard.renderLoading(false, 'Создать', 'Создание..');
   }
 };
 
 //Обработчик изменения информации о пользователе
 const handleEditUser = async (inputValues) => {
-  renderLoading(true, "edit");
+  popupEditUser.renderLoading(true);
   try {
     const { data } = await api.updateUser(inputValues);
     user.setUserInfo(data);
@@ -52,13 +52,13 @@ const handleEditUser = async (inputValues) => {
     console.error(error.response.status + ": " + error.response.data.message);
   }
   finally {
-    renderLoading(false, "edit");
+    popupEditUser.renderLoading(false);
   }
 };
 
 //Обработчик изменения аватара
 const handleAddAvatar = async ({ avatar }) => {
-  renderLoading(true, "avatar");
+  popupAddAvatar.renderLoading(true);
   try {
     const { data } = await api.updateAvatar(avatar);
     user.setUserAvatar(data);
@@ -69,7 +69,7 @@ const handleAddAvatar = async ({ avatar }) => {
     console.error(error.response.status + ": " + error.response.data.message);
   }
   finally {
-    renderLoading(false, "avatar");
+    popupAddAvatar.renderLoading(false);
   }
 };
 
