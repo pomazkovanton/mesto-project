@@ -8,17 +8,13 @@ export default class Api {
 
   //Универсальный обработчик запроса на сервер
   async _handleRequest(url, method, data = {}, headers = this._headers) {
-    try {
-      const res = await axios(`${this._baseUrl}${url}`, {
-        method: method,
-        data: data,
-        headers: headers,
-      });
-      return res;
-    } catch (error) {
-      console.error(error.response.status + ": " + error.response.data.message);
-    }
-  }
+    const res = await axios(`${this._baseUrl}${url}`, {
+      method: method,
+      data: data,
+      headers: headers,
+    });
+    return res;
+   }
 
   //Получение данных о пользователе с сервера
   getUser() {

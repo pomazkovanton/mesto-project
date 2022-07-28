@@ -25,35 +25,65 @@ import { renderLoading, handleOpenPopup } from "../utils/utils";
 //Обработчик добавления новой карточки
 const handleAddCard = async (inputValues) => {
   renderLoading(true, "add");
-  const { data } = await api.postCards(inputValues);
-  gallery.addItem(renderCard(data));
-  popupAddCard.close();
-  renderLoading(false, "add");
+  try {
+    const { data } = await api.postCards(inputValues);
+    gallery.addItem(renderCard(data));
+    popupAddCard.close();
+  }
+  catch (error)  {
+    console.error('Ошибка: Невозможно добавить новую карточку. Подробности ниже.');
+    console.error(error.response.status + ": " + error.response.data.message);
+  }
+  finally {
+    renderLoading(false, "add");
+  }
 };
 
 //Обработчик изменения информации о пользователе
 const handleEditUser = async (inputValues) => {
   renderLoading(true, "edit");
-  const { data } = await api.updateUser(inputValues);
-  user.setUserInfo(data);
-  popupEditUser.close();
-  renderLoading(false, "edit");
+  try {
+    const { data } = await api.updateUser(inputValues);
+    user.setUserInfo(data);
+    popupEditUser.close();
+  }
+  catch (error) {
+    console.error('Ошибка: Невозможно изменить информацию о пользователе. Подробности ниже.');
+    console.error(error.response.status + ": " + error.response.data.message);
+  }
+  finally {
+    renderLoading(false, "edit");
+  }
 };
 
 //Обработчик изменения аватара
 const handleAddAvatar = async ({ avatar }) => {
   renderLoading(true, "avatar");
-  const { data } = await api.updateAvatar(avatar);
-  user.setUserAvatar(data);
-  popupAddAvatar.close();
-  renderLoading(false, "avatar");
+  try {
+    const { data } = await api.updateAvatar(avatar);
+    user.setUserAvatar(data);
+    popupAddAvatar.close();
+  }
+  catch (error) {
+    console.error('Ошибка: Невозможно обновить аватар пользователя. Подробности ниже.');
+    console.error(error.response.status + ": " + error.response.data.message);
+  }
+  finally {
+    renderLoading(false, "avatar");
+  }
 };
 
 //Обработчик удаления карточки
 const handleClosingAlert = async (cardID) => {
-  await api.delCard(cardID);
-  popupAlert.card.deleteCard();
-  popupAlert.close();
+  try {
+    await api.delCard(cardID);
+    popupAlert.card.deleteCard();
+    popupAlert.close();
+  }
+  catch (error){
+    console.error('Ошибка: Невозможно удалить карточку. Подробности ниже.');
+    console.error(error.response.status + ": " + error.response.data.message);
+  }
 };
 
 // Создания экземпляра карточки и рендер новой карточки
@@ -100,26 +130,40 @@ popupEditUser.setEventListeners();
 popupAddCard.setEventListeners();
 
 const getData = async () => {
-  const serverData = await Promise.all([api.getUser(), api.getCards()]);
-  const userData = serverData[0].data;
-  const cards = serverData[1].data;
+  try {
+    const serverData = await Promise.all([api.getUser(), api.getCards()]);
+    const userData = serverData[0].data;
+    const cards = serverData[1].data;
 
-  //Сохранение данных о пользователе
-  user._id = userData._id;
-  user.setUserInfo(userData);
-  user.setUserAvatar(userData);
+    //Сохранение данных о пользователе
+    user._id = userData._id;
+    user.setUserInfo(userData);
+    user.setUserAvatar(userData);
 
-  //Рендер карточек на странице
-  gallery.rendered(cards);
+    //Рендер карточек на странице
+    gallery.rendered(cards);
+  }
+  catch (error) {
+    console.error('Ошибка: Не удалось получить данные с сервера. Подробности ниже.');
+    console.error(error.response.status + ": " + error.response.data.message);
+  }
+
 };
 
 // Обработчик лайков
 const handleLikeCard = async (card) => {
-  const { data } = card.checkLike()
-    ? await api.delLike(card._id)
-    : await api.putLike(card._id);
-  card.likes = data.likes;
-  card.renderLike();
+  try {
+    const { data } = card.checkLike()
+      ? await api.delLike(card._id)
+      : await api.putLike(card._id);
+    card.likes = data.likes;
+    card.renderLike();
+  }
+  catch (error) {
+    console.error('Ошибка: Не удалось изменить состояние лайка. Подробности ниже.');
+    console.error(error.response.status + ": " + error.response.data.message);
+  }
+
 };
 
 // Обработчик клика по изображению карточки (открытие popup с изображением)
