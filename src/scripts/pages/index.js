@@ -20,7 +20,7 @@ import {
   forms,
   elementsPopupEdit,
 } from "../utils/constants";
-import { handleOpenPopup } from "../utils/utils";
+import { handleOpenPopup, handleErrors } from "../utils/utils";
 
 //Обработчик добавления новой карточки
 const handleAddCard = async (inputValues) => {
@@ -31,8 +31,7 @@ const handleAddCard = async (inputValues) => {
     popupAddCard.close();
   }
   catch (error)  {
-    console.error('Ошибка: Невозможно добавить новую карточку. Подробности ниже.');
-    console.error(error.response.status + ": " + error.response.data.message);
+    handleErrors(error, 'Невозможно добавить новую карточку');
   }
   finally {
     popupAddCard.renderLoading(false, 'Создать', 'Создание..');
@@ -48,8 +47,7 @@ const handleEditUser = async (inputValues) => {
     popupEditUser.close();
   }
   catch (error) {
-    console.error('Ошибка: Невозможно изменить информацию о пользователе. Подробности ниже.');
-    console.error(error.response.status + ": " + error.response.data.message);
+    handleErrors(error, 'Невозможно изменить информацию о пользователе');
   }
   finally {
     popupEditUser.renderLoading(false);
@@ -65,8 +63,7 @@ const handleAddAvatar = async ({ avatar }) => {
     popupAddAvatar.close();
   }
   catch (error) {
-    console.error('Ошибка: Невозможно обновить аватар пользователя. Подробности ниже.');
-    console.error(error.response.status + ": " + error.response.data.message);
+    handleErrors(error, 'Невозможно обновить аватар пользователя');
   }
   finally {
     popupAddAvatar.renderLoading(false);
@@ -81,8 +78,7 @@ const handleClosingAlert = async (cardID) => {
     popupAlert.close();
   }
   catch (error){
-    console.error('Ошибка: Невозможно удалить карточку. Подробности ниже.');
-    console.error(error.response.status + ": " + error.response.data.message);
+    handleErrors(error, 'Невозможно удалить карточку');
   }
 };
 
@@ -144,8 +140,7 @@ const getData = async () => {
     gallery.rendered(cards);
   }
   catch (error) {
-    console.error('Ошибка: Не удалось получить данные с сервера. Подробности ниже.');
-    console.error(error.response.status + ": " + error.response.data.message);
+    handleErrors(error, 'Не удалось получить данные с сервера');
   }
 
 };
@@ -160,8 +155,7 @@ const handleLikeCard = async (card) => {
     card.renderLike();
   }
   catch (error) {
-    console.error('Ошибка: Не удалось изменить состояние лайка. Подробности ниже.');
-    console.error(error.response.status + ": " + error.response.data.message);
+    handleErrors(error, 'Не удалось изменить состояние лайка');
   }
 
 };
