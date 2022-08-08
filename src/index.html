@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="icon" href="<%=require('./accets/images/favicon.svg')%>" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="<%=require('./accets/images/favicon.svg')%>"
+      type="image/svg+xml"
+    />
   </head>
   <body class="page">
     <header class="header">
@@ -55,14 +59,20 @@
     <div class="popup popup_type_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" action="#" method="post" name="formEdit" novalidate>
+        <form
+          class="popup__form"
+          action="#"
+          method="post"
+          name="formEdit"
+          novalidate
+        >
           <label class="popup__form-label">
             <input
               id="name-input"
               class="popup__form-input popup__form-input_type_name"
               type="text"
               placeholder="Введите ваше имя"
-              name="userName"
+              name="name"
               minlength="2"
               maxlength="40"
               required
@@ -75,14 +85,19 @@
               class="popup__form-input popup__form-input_type_position"
               type="text"
               placeholder="Введите вашу профессию"
-              name="userPosition"
+              name="about"
               minlength="2"
               maxlength="200"
               required
             />
             <span class="position-input-error popup__form-error"></span>
           </label>
-          <button class="popup__form-btn popup__form-btn_type_edit" type="submit">Сохранить</button>
+          <button
+            class="popup__form-btn popup__form-btn_type_edit"
+            type="submit"
+          >
+            Сохранить
+          </button>
         </form>
         <button
           class="popup__btn-close"
@@ -94,14 +109,20 @@
     <div class="popup popup_type_add">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" action="#" method="post" name="formAdd" novalidate>
+        <form
+          class="popup__form"
+          action="#"
+          method="post"
+          name="formAdd"
+          novalidate
+        >
           <label class="popup__form-label">
             <input
               id="place-input"
               class="popup__form-input popup__form-input_type_place"
               type="text"
               placeholder="Название"
-              name="placeName"
+              name="name"
               minlength="2"
               maxlength="30"
               required
@@ -114,12 +135,17 @@
               class="popup__form-input popup__form-input_type_img"
               type="url"
               placeholder="Ссылка на картинку"
-              name="placeImg"
+              name="link"
               required
             />
             <span class="img-input-error popup__form-error"></span>
           </label>
-          <button class="popup__form-btn popup__form-btn_type_add" type="submit">Cохранить</button>
+          <button
+            class="popup__form-btn popup__form-btn_type_add"
+            type="submit"
+          >
+            Создать
+          </button>
         </form>
         <button
           class="popup__btn-close"
@@ -131,7 +157,13 @@
     <div class="popup popup_type_avatar">
       <div class="popup__container">
         <h2 class="popup__title">Обновить аватар</h2>
-        <form class="popup__form" action="#" method="post" name="formAvatar" novalidate>
+        <form
+          class="popup__form"
+          action="#"
+          method="post"
+          name="formAvatar"
+          novalidate
+        >
           <label class="popup__form-label">
             <input
               id="avatar-input"
@@ -143,7 +175,12 @@
             />
             <span class="avatar-input-error popup__form-error"></span>
           </label>
-          <button class="popup__form-btn popup__form-btn_type_avatar" type="submit">Сохранить</button>
+          <button
+            class="popup__form-btn popup__form-btn_type_avatar"
+            type="submit"
+          >
+            Сохранить
+          </button>
         </form>
         <button
           class="popup__btn-close"
@@ -166,7 +203,12 @@
     <div class="popup popup_type_alert">
       <div class="popup__container">
         <h2 class="popup__title">Вы уверены?</h2>
-        <button class="popup__form-btn popup__form-btn_type_alert" type="button">Да</button>
+        <button
+          class="popup__form-btn popup__form-btn_type_alert"
+          type="button"
+        >
+          Да
+        </button>
         <button
           class="popup__btn-close"
           type="button"
